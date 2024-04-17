@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeStack from './src/pages/home/HomeStack';
+import HomeStack from './src/pages/stack/HomeStack';
 
 export default function Wrapper() {
   return (
