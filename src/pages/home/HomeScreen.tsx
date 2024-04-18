@@ -1,6 +1,7 @@
 import { View, Text, Button } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
+import BackgroundView from '../../components/ui/Background';
 
 
 const HomeScreen = () => {
@@ -12,14 +13,19 @@ const HomeScreen = () => {
     }
 
     return (
-        <View>
-            <Text>HomeScreen</Text>
-            <Text>HomeScreen</Text>
-            <Text>HomeScreen</Text>
-            <Text>HomeScreen2</Text>
-            <Button title='next' onPress={handleNavigate} />
+        <BackgroundView>
+            <Text>Hola</Text>
+            <Text>Hola</Text>
+            <Text>Hola</Text>
 
-        </View>
+            <View style={{ flex: 1, paddingHorizontal: 0 }}>
+                <Button title='next' onPress={handleNavigate} />
+
+
+            </View>
+
+
+        </BackgroundView>
     )
 }
 
