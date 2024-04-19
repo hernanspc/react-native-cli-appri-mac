@@ -1,64 +1,83 @@
-import { View, Text, Button, SafeAreaView, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, Button, StyleSheet, Image, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 import BackgroundView from '../../components/ui/Background';
-import logoHeader from '../../assets/logo/logo-header.png'; // Asegúrate de que la ruta a tu imagen sea correcta
-import Icon from 'react-native-vector-icons/AntDesign';
+import Header from '../../components/ui/Header';
+import image from '../../assets/images/family.png';
 
 const HomeScreen = () => {
-
     const navigation = useNavigation();
 
     const handleNavigate = () => {
         navigation.navigate('PlansScreen' as never);
-    }
+    };
+
+    const windowWidth = Dimensions.get('window').width;
 
     return (
         <BackgroundView>
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ paddingTop: 12, paddingLeft: 24 }}>
-                    <Image source={logoHeader} style={{ width: 65, height: 50, resizeMode: 'contain' }} />
+            <Header />
+
+            <View style={styles.container}>
+                <View style={[styles.section, { width: windowWidth / 2 - 20 }]}>
+                    <LinearGradient
+                        colors={['#00F4E2', '#00FF7F']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
+                        style={styles.linearGradient}
+                    >
+                        <Text style={styles.text}>Seguro Salud Flexible</Text>
+                    </LinearGradient>
+                    <Text style={styles.title}>Creado para ti y tu familia</Text>
+
                 </View>
-                <View style={styles.infoContainer}>
-                    <Icon name="phone" size={20} color="#000" style={styles.icon} />
-                    <View style={styles.textContainer}>
-                        <Text style={styles.phoneText}>(01) 4116001</Text>
-                    </View>
+                <View style={[styles.section, { width: windowWidth / 2 - 20 }]}>
+                    <Image source={image} style={styles.image} />
                 </View>
             </View>
 
-            <Button title='next' onPress={handleNavigate} />
-
-        </BackgroundView >
-    )
-}
-
-export default HomeScreen;
+            <Button title='Siguiente' onPress={handleNavigate} />
+        </BackgroundView>
+    );
+};
 
 const styles = StyleSheet.create({
-    icon: {
-        marginRight: 10,
-    },
-    infoContainer: {
+    container: {
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
+        paddingHorizontal: 16,
     },
-    textContainer: {
-        alignItems: 'flex-end',
+    section: {
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        borderRadius: 8,
+        // padding: 16,
+        padding: 12,
     },
-    phoneText: {
+    linearGradient: {
+        padding: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8,
+    },
+    text: {
+        fontSize: 12,
         fontWeight: 'bold',
-        fontFamily: 'comp-16-bold',
-        fontSize: 16,
-        lineHeight: 20,
-        letterSpacing: 0.4,
+        letterSpacing: 0.3,
     },
-    phoneName: {
-        fontFamily: 'comp-16-bold',
-        fontSize: 16,
-        lineHeight: 20,
-        letterSpacing: 0.4,
-        color: '#888', // Color de ejemplo, ajusta según lo necesario
+    title: {
+        fontFamily: 'BR Sonoma',
+        fontWeight: '700',
+        fontSize: 28,
+        lineHeight: 36,
+        textAlign: 'justify',
+        marginTop: 12,
+    },
+    image: {
+        resizeMode: 'contain',
+        borderRadius: 10,
     },
 });
+
+export default HomeScreen;

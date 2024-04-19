@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { View, StyleSheet, ImageBackground, SafeAreaView, StatusBar } from 'react-native';
 
 interface BackgroundViewProps {
     children?: ReactNode;
@@ -12,7 +12,13 @@ const BackgroundView: React.FC<BackgroundViewProps> = ({ children }) => {
                 source={require('../../assets/background/blur-asset1.png')}
                 style={styles.topBackground}
             />
-            <SafeAreaView>
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
+
+            <SafeAreaView  >
                 {children}
             </SafeAreaView>
             <ImageBackground
