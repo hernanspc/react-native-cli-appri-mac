@@ -6,6 +6,8 @@ import BackgroundView from '../../components/ui/Background';
 import Header from '../../components/ui/Header';
 import image from '../../assets/images/family.png';
 
+const windowWidth = Dimensions.get('window').width;
+
 const HomeScreen = () => {
     const navigation = useNavigation();
 
@@ -13,14 +15,12 @@ const HomeScreen = () => {
         navigation.navigate('PlansScreen' as never);
     };
 
-    const windowWidth = Dimensions.get('window').width;
-
     return (
         <BackgroundView>
             <Header />
 
             <View style={styles.container}>
-                <View style={[styles.section, { width: windowWidth / 2 - 20 }]}>
+                <View style={[styles.section, { width: windowWidth / 2 }]}>
                     <LinearGradient
                         colors={['#00F4E2', '#00FF7F']}
                         start={{ x: 0, y: 0 }}
@@ -32,7 +32,8 @@ const HomeScreen = () => {
                     <Text style={styles.title}>Creado para ti y tu familia</Text>
 
                 </View>
-                <View style={[styles.section, { width: windowWidth / 2 - 20 }]}>
+
+                <View style={[styles.section, styles.imageContainer]}>
                     <Image source={image} style={styles.image} />
                 </View>
             </View>
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         letterSpacing: 0.3,
+        color: 'black',
     },
     title: {
         fontFamily: 'BR Sonoma',
@@ -73,10 +75,15 @@ const styles = StyleSheet.create({
         lineHeight: 36,
         textAlign: 'justify',
         marginTop: 12,
+        color: 'black',
     },
     image: {
         resizeMode: 'contain',
         borderRadius: 10,
+    },
+    imageContainer: {
+        width: windowWidth / 2 - 20,
+        alignItems: 'flex-end', // Alinea la imagen a la izquierda
     },
 });
 

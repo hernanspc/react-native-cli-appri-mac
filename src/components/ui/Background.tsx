@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, ImageBackground, SafeAreaView, StatusBar } from 'react-native';
+import { View, StyleSheet, ImageBackground, SafeAreaView, StatusBar, Platform } from 'react-native';
 
 interface BackgroundViewProps {
     children?: ReactNode;
@@ -7,7 +7,7 @@ interface BackgroundViewProps {
 
 const BackgroundView: React.FC<BackgroundViewProps> = ({ children }) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, Platform.OS == 'android' ? { paddingTop: 20 } : null]}>
             <ImageBackground
                 source={require('../../assets/background/blur-asset1.png')}
                 style={styles.topBackground}
