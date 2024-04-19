@@ -123,9 +123,10 @@ const HomeScreen = () => {
                     <CustomDropdown />
                 </View>
                 <CustomTextInput
-                    hintText="Celular"
+                    hintText="Nro documento"
                     value={phoneNumber}
                     onChangeText={handlePhoneNumberChange}
+                    stylesProp={{ width: '50%' }} // Ancho personalizado como objeto de estilo
                 />
             </View>
 

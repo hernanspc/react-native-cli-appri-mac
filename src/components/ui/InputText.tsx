@@ -1,15 +1,16 @@
 import React from 'react';
-import { TextInput, StyleSheet, View, ViewProps } from 'react-native';
+import { TextInput, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 
 interface CustomTextInputProps {
     hintText: string;
     value?: string;
     onChangeText?: (text: string) => void;
+    stylesProp?: StyleProp<ViewStyle>; // Nueva prop para el ancho como objeto de estilo
 }
 
-const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onChangeText, ...props }) => {
+const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onChangeText, stylesProp, ...props }) => {
     return (
-        <View style={[styles.container]}>
+        <View style={[styles.container, stylesProp]} {...props}>
             <TextInput
                 placeholder={hintText}
                 value={value}
@@ -23,20 +24,16 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onCh
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
         height: 56,
         borderRadius: 8,
         borderWidth: 1,
         borderColor: '#5E6488',
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        marginTop: 10,
-        marginBottom: 10,
     },
     input: {
         flex: 1,
         fontSize: 16,
         color: 'black',
+        paddingHorizontal: 16, // Añadido un padding para el texto
     },
 });
 
