@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, Dimensions, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import BackgroundView from '../../components/ui/Background';
@@ -10,6 +10,8 @@ import MyButton from '../../components/ui/MyButton';
 import CustomTextInput from '../../components/ui/InputText';
 import Checkbox from '../../components/ui/CheckItem';
 import DropdownComponent from '../../components/ui/DropDown';
+import Footer from '../../components/ui/Footer';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -38,83 +40,88 @@ const HomeScreen = () => {
     };
 
     return (
-        <BackgroundView>
-            <Header />
+        <>
+            <BackgroundView>
+                <ScrollView>
+                    <Header />
+                    <View style={styles.container}>
+                        <View style={[styles.section, { width: windowWidth / 2 }]}>
+                            <LinearGradient
+                                colors={['#00F4E2', '#00FF7F']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                                style={styles.linearGradient}
+                            >
+                                <Text style={styles.text}>Seguro Salud Flexible</Text>
+                            </LinearGradient>
+                            <Text style={styles.title}>Creado para ti y tu familia</Text>
 
-            <View style={styles.container}>
-                <View style={[styles.section, { width: windowWidth / 2 }]}>
-                    <LinearGradient
-                        colors={['#00F4E2', '#00FF7F']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 0 }}
-                        style={styles.linearGradient}
-                    >
-                        <Text style={styles.text}>Seguro Salud Flexible</Text>
-                    </LinearGradient>
-                    <Text style={styles.title}>Creado para ti y tu familia</Text>
+                        </View>
 
-                </View>
-
-                <View style={[styles.section, styles.imageContainer]}>
-                    <Image source={image} style={styles.image} />
-                </View>
-            </View>
-
-            <Divider />
-
-            <View style={{ marginHorizontal: 20, paddingVertical: 25 }}>
-                <Text style={styles.subtitle}>
-                    Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
-                </Text>
-            </View>
-
-            <View style={{ marginHorizontal: 20 }}>
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
-                        <DropdownComponent
-                            isFocus={isFocus}
-                            setIsFocus={setIsFocus}
-                            setDocumentType={setDocumentType}
-                            setDocumentName={setDocumentName}
-                            selectedValue={documentType} />
+                        <View style={[styles.section, styles.imageContainer]}>
+                            <Image source={image} style={styles.image} />
+                        </View>
                     </View>
-                    <CustomTextInput
-                        hintText="Nro documento"
-                        value={numberDocument}
-                        onChangeText={setNumberDocument}
-                        stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
-                    />
-                </View>
 
-                <CustomTextInput
-                    hintText="Celular"
-                    value={phoneNumber}
-                    onChangeText={handlePhoneNumberChange}
-                    stylesProp={{ marginBottom: 10 }}
-                />
+                    <Divider />
 
-                <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
+                    <View style={{ marginHorizontal: 20, paddingVertical: 25 }}>
+                        <Text style={styles.subtitle}>
+                            Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
+                        </Text>
+                    </View>
 
-                <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
+                    <View style={{ marginHorizontal: 20 }}>
+                        <View style={{ display: 'flex', flexDirection: 'row' }}>
+                            <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
+                                <DropdownComponent
+                                    isFocus={isFocus}
+                                    setIsFocus={setIsFocus}
+                                    setDocumentType={setDocumentType}
+                                    setDocumentName={setDocumentName}
+                                    selectedValue={documentType} />
+                            </View>
+                            <CustomTextInput
+                                hintText="Nro documento"
+                                value={numberDocument}
+                                onChangeText={setNumberDocument}
+                                stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
+                            />
+                        </View>
 
-                <Text style={{
-                    fontFamily: 'BR Sonoma',
-                    fontWeight: '600',
-                    fontSize: 12,
-                    lineHeight: 20,
-                    letterSpacing: 0.1,
-                    color: '#03050F',
-                    marginVertical: 20,
-                }}>
-                    Aplican Términos y Condiciones.
-                </Text>
+                        <CustomTextInput
+                            hintText="Celular"
+                            value={phoneNumber}
+                            onChangeText={handlePhoneNumberChange}
+                            stylesProp={{ marginBottom: 10 }}
+                        />
+
+                        <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
+
+                        <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
+
+                        <Text style={{
+                            fontFamily: 'BR Sonoma',
+                            fontWeight: '600',
+                            fontSize: 12,
+                            lineHeight: 20,
+                            letterSpacing: 0.1,
+                            color: '#03050F',
+                            marginVertical: 20,
+                            textDecorationLine: 'underline',
+                        }}>
+                            Aplican Términos y Condiciones.
+                        </Text>
 
 
-                <MyButton title="Cotiza aquí." onPress={handleNavigate} />
+                        <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
-            </View>
+                    </View>
+                    <Footer />
+                </ScrollView>
+            </BackgroundView>
+        </>
 
-        </BackgroundView>
     );
 };
 
