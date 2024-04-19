@@ -15,14 +15,17 @@ const windowWidth = Dimensions.get('window').width;
 
 const HomeScreen = () => {
     const navigation = useNavigation();
+
+    const [isFocus, setIsFocus] = useState(false);
+    const [documentName, setDocumentName] = useState<string | null>(null);
+    const [documentType, setDocumentType] = useState<string | null>(null);
+
+    const [numberDocument, setNumberDocument] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const [privacyPolicy, setPrivacyPolicy] = React.useState(true);
     const [politicalCommunications, setPoliticalCommunications] = React.useState(true);
 
-    const [isFocus, setIsFocus] = useState(false);
-    const [documentName, setDocumentName] = useState<string | null>(null);
-    const [documentType, setDocumentType] = useState<string | null>(null);
 
     const handleNavigate = () => {
         console.log('Button pressed');
@@ -73,12 +76,12 @@ const HomeScreen = () => {
                             setIsFocus={setIsFocus}
                             setDocumentType={setDocumentType}
                             setDocumentName={setDocumentName}
-                        />
+                            selectedValue={documentType} />
                     </View>
                     <CustomTextInput
                         hintText="Nro documento"
-                        value={phoneNumber}
-                        onChangeText={handlePhoneNumberChange}
+                        value={numberDocument}
+                        onChangeText={setNumberDocument}
                         stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
                     />
                 </View>

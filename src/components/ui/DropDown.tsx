@@ -7,9 +7,10 @@ interface DropdownProps {
     setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
     setDocumentType: React.Dispatch<React.SetStateAction<string | null>>;
     setDocumentName: React.Dispatch<React.SetStateAction<string | null>>;
+    selectedValue: string | null; // Agregar esta prop
 }
 
-const DropdownComponent: React.FC<DropdownProps> = ({ isFocus, setIsFocus, setDocumentType, setDocumentName }) => {
+const DropdownComponent: React.FC<DropdownProps> = ({ isFocus, setIsFocus, setDocumentType, setDocumentName, selectedValue }) => {
 
     const data = [
         { label: 'DNI', value: '1' },
@@ -27,7 +28,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ isFocus, setIsFocus, setDo
             labelField="label"
             valueField="value"
             placeholder={!isFocus ? 'Seleccione' : '...'}
-            value={null}
+            value={selectedValue} // Utiliza el estado documentType aquí
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={item => {
