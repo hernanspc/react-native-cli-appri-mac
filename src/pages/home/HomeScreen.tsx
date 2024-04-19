@@ -116,20 +116,26 @@ const HomeScreen = () => {
                 <Text style={styles.subtitle}>
                     Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
                 </Text>
-
             </View>
 
-            <View style={styles.containerIdentification}>
-                <CustomDropdown />
-            </View>
-
-            {/* <CustomTextInput
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <View style={styles.containerIdentification}>
+                    <CustomDropdown />
+                </View>
+                <CustomTextInput
                     hintText="Celular"
                     value={phoneNumber}
                     onChangeText={handlePhoneNumberChange}
-                /> */}
+                />
+            </View>
 
-            {/* <MyButton title="Cotiza aquí." onPress={handleNavigate} /> */}
+            <CustomTextInput
+                hintText="Celular"
+                value={phoneNumber}
+                onChangeText={handlePhoneNumberChange}
+            />
+
+            <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
         </BackgroundView>
     );
@@ -137,12 +143,10 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
     containerDropdown: {
-        padding: 16,
-        justifyContent: 'center',
-        alignContent: 'center',
+        // padding: 16,
     },
     dropdown: {
-        height: 50,
+        height: 56,
         borderColor: 'gray',
         borderWidth: 0.5,
         borderRadius: 8,
@@ -175,15 +179,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     dropdownContainer: {
-        // flex: 1,
         marginRight: 8,
     },
     textInputContainer: {
-        // flex: 1,
         marginLeft: 8, // Agregado un margen izquierdo para separar los dos componentes
     },
     textInput: {
-        // flex: 1,
         height: 56,
         borderWidth: 1,
         borderColor: '#5E6488',
@@ -191,8 +192,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     containerIdentification: {
-        flexDirection: 'row',
-        display: 'flex',
+        width: '50%',
+        // flexDirection: 'row',
+        // display: 'flex',
     },
     container: {
         flexDirection: 'row',
