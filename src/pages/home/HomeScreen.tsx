@@ -9,9 +9,8 @@ import Divider from '../../components/ui/Divider';
 import MyButton from '../../components/ui/MyButton';
 import CustomTextInput from '../../components/ui/InputText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import { CheckBox } from '@rneui/themed';
 import { Dropdown } from 'react-native-element-dropdown';
-
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -32,6 +31,9 @@ const HomeScreen = () => {
     };
 
 
+    const [checked, setChecked] = React.useState(false);
+
+
     const CustomDropdown: React.FC = () => {
 
         const data = [
@@ -42,6 +44,7 @@ const HomeScreen = () => {
         const [isFocus, setIsFocus] = useState(false);
         const [documentName, setDocumentName] = useState<string | null>(null);
         const [documentType, setDocumentType] = useState<string | null>(null);
+
 
 
         return (
@@ -112,31 +115,45 @@ const HomeScreen = () => {
 
             <Divider />
 
-            <View style={{ marginHorizontal: 20, paddingVertical: 30 }}>
+            <View style={{ marginHorizontal: 20, paddingVertical: 25 }}>
                 <Text style={styles.subtitle}>
                     Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
                 </Text>
             </View>
 
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <View style={styles.containerIdentification}>
-                    <CustomDropdown />
+            <View style={{ marginHorizontal: 20 }}>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                    <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
+                        <CustomDropdown />
+                    </View>
+                    <CustomTextInput
+                        hintText="Nro documento"
+                        value={phoneNumber}
+                        onChangeText={handlePhoneNumberChange}
+                        stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
+                    />
                 </View>
+
                 <CustomTextInput
-                    hintText="Nro documento"
+                    hintText="Celular"
                     value={phoneNumber}
                     onChangeText={handlePhoneNumberChange}
-                    stylesProp={{ width: '50%' }} // Ancho personalizado como objeto de estilo
+
                 />
+
+                <CheckBox
+                    checked={checked}
+                    onPress={() => { }}
+                    // Use ThemeProvider to make change for all checkbox
+                    iconType="material-community"
+                    checkedIcon="checkbox-marked"
+                    uncheckedIcon="checkbox-blank-outline"
+                    checkedColor="red"
+                />
+
+                <MyButton title="Cotiza aquí." onPress={handleNavigate} />
+
             </View>
-
-            <CustomTextInput
-                hintText="Celular"
-                value={phoneNumber}
-                onChangeText={handlePhoneNumberChange}
-            />
-
-            <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
         </BackgroundView>
     );
