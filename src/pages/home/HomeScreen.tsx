@@ -8,9 +8,8 @@ import image from '../../assets/images/family.png';
 import Divider from '../../components/ui/Divider';
 import MyButton from '../../components/ui/MyButton';
 import CustomTextInput from '../../components/ui/InputText';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { Dropdown } from 'react-native-element-dropdown';
 import Checkbox from '../../components/ui/CheckItem';
+import DropdownComponent from '../../components/ui/DropDown';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,6 +20,10 @@ const HomeScreen = () => {
     const [privacyPolicy, setPrivacyPolicy] = React.useState(true);
     const [politicalCommunications, setPoliticalCommunications] = React.useState(true);
 
+    const [isFocus, setIsFocus] = useState(false);
+    const [documentName, setDocumentName] = useState<string | null>(null);
+    const [documentType, setDocumentType] = useState<string | null>(null);
+
     const handleNavigate = () => {
         console.log('Button pressed');
         navigation.navigate('PlansScreen' as never);
@@ -29,41 +32,6 @@ const HomeScreen = () => {
 
     const handlePhoneNumberChange = (text: string) => {
         setPhoneNumber(text);
-    };
-
-    const CustomDropdown: React.FC = () => {
-
-        const data = [
-            { label: 'DNI', value: '1' },
-            { label: 'CARNET EXTRANGERIA', value: '2' },
-        ];
-
-        const [isFocus, setIsFocus] = useState(false);
-        const [documentName, setDocumentName] = useState<string | null>(null);
-        const [documentType, setDocumentType] = useState<string | null>(null);
-
-        return (
-            <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                iconStyle={styles.iconStyle}
-                data={data}
-                maxHeight={300}
-                labelField="label"
-                valueField="value"
-                placeholder={!isFocus ? 'Seleccione' : '...'}
-                value={documentType}
-                onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
-                onChange={item => {
-                    console.log('Seleccione => ', item);
-                    setDocumentType(item.value);
-                    setDocumentName(item.label);
-                    setIsFocus(false);
-                }}
-            />
-        );
     };
 
     return (
@@ -100,7 +68,12 @@ const HomeScreen = () => {
             <View style={{ marginHorizontal: 20 }}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
-                        <CustomDropdown />
+                        <DropdownComponent
+                            isFocus={isFocus}
+                            setIsFocus={setIsFocus}
+                            setDocumentType={setDocumentType}
+                            setDocumentName={setDocumentName}
+                        />
                     </View>
                     <CustomTextInput
                         hintText="Nro documento"
