@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import BackgroundView from '../../components/ui/Background';
 import Header from '../../components/ui/Header';
 import image from '../../assets/images/family.png';
+import Divider from '../../components/ui/Divider';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -18,6 +19,7 @@ const HomeScreen = () => {
     return (
         <BackgroundView>
             <Header />
+
 
             <View style={styles.container}>
                 <View style={[styles.section, { width: windowWidth / 2 }]}>
@@ -38,7 +40,16 @@ const HomeScreen = () => {
                 </View>
             </View>
 
-            <Button title='Siguiente' onPress={handleNavigate} />
+            <Divider />
+
+            <View style={{ marginHorizontal: 20 }}>
+                <Text style={styles.subtitle}>
+                    Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
+                </Text>
+                <Button title='Siguiente' onPress={handleNavigate} />
+
+            </View>
+
         </BackgroundView>
     );
 };
@@ -84,6 +95,14 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: windowWidth / 2 - 20,
         alignItems: 'flex-end', // Alinea la imagen a la izquierda
+    },
+    subtitle: {
+        fontFamily: 'BR Sonoma',
+        fontWeight: '600',
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0.2,
+        color: 'black',
     },
 });
 
