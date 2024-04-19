@@ -6,6 +6,7 @@ import BackgroundView from '../../components/ui/Background';
 import Header from '../../components/ui/Header';
 import image from '../../assets/images/family.png';
 import Divider from '../../components/ui/Divider';
+import MyButton from '../../components/ui/MyButton';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -46,7 +47,8 @@ const HomeScreen = () => {
                 <Text style={styles.subtitle}>
                     Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
                 </Text>
-                <Button title='Siguiente' onPress={handleNavigate} />
+
+                <MyButton text="Cotiza aquí" onPress={handleNavigate} />
 
             </View>
 
@@ -61,10 +63,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     section: {
-        // justifyContent: 'center',
-        // alignItems: 'center',
         borderRadius: 8,
-        // padding: 16,
         padding: 12,
     },
     linearGradient: {
