@@ -9,30 +9,27 @@ import Divider from '../../components/ui/Divider';
 import MyButton from '../../components/ui/MyButton';
 import CustomTextInput from '../../components/ui/InputText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { CheckBox } from '@rneui/themed';
 import { Dropdown } from 'react-native-element-dropdown';
+import Checkbox from '../../components/ui/CheckItem';
 
 const windowWidth = Dimensions.get('window').width;
 
-
-
 const HomeScreen = () => {
     const navigation = useNavigation();
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const [privacyPolicy, setPrivacyPolicy] = React.useState(true);
+    const [politicalCommunications, setPoliticalCommunications] = React.useState(true);
 
     const handleNavigate = () => {
         console.log('Button pressed');
         navigation.navigate('PlansScreen' as never);
     };
 
-    const [phoneNumber, setPhoneNumber] = useState('');
 
     const handlePhoneNumberChange = (text: string) => {
         setPhoneNumber(text);
     };
-
-
-    const [checked, setChecked] = React.useState(false);
-
 
     const CustomDropdown: React.FC = () => {
 
@@ -45,54 +42,33 @@ const HomeScreen = () => {
         const [documentName, setDocumentName] = useState<string | null>(null);
         const [documentType, setDocumentType] = useState<string | null>(null);
 
-
-
         return (
-            <View style={styles.containerDropdown}>
-                <Dropdown
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    iconStyle={styles.iconStyle}
-                    data={data}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Seleccione' : '...'}
-                    value={documentType}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        console.log('Seleccione => ', item);
-                        setDocumentType(item.value);
-                        setDocumentName(item.label);
-                        setIsFocus(false);
-                    }}
-                />
-            </View>
-        );
-    };
-
-
-    const CustomTextInputDocument: React.FC = () => {
-        const [text, setText] = useState('');
-
-        return (
-            <View style={styles.textInputContainer}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="12345678"
-                    value={text}
-                    onChangeText={setText}
-                />
-            </View>
+            <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                iconStyle={styles.iconStyle}
+                data={data}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Seleccione' : '...'}
+                value={documentType}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                    console.log('Seleccione => ', item);
+                    setDocumentType(item.value);
+                    setDocumentName(item.label);
+                    setIsFocus(false);
+                }}
+            />
         );
     };
 
     return (
         <BackgroundView>
             <Header />
-
 
             <View style={styles.container}>
                 <View style={[styles.section, { width: windowWidth / 2 }]}>
@@ -138,18 +114,25 @@ const HomeScreen = () => {
                     hintText="Celular"
                     value={phoneNumber}
                     onChangeText={handlePhoneNumberChange}
-
+                    stylesProp={{ marginBottom: 10 }}
                 />
 
-                <CheckBox
-                    checked={checked}
-                    onPress={() => { }}
-                    // Use ThemeProvider to make change for all checkbox
-                    iconType="material-community"
-                    checkedIcon="checkbox-marked"
-                    uncheckedIcon="checkbox-blank-outline"
-                    checkedColor="red"
-                />
+                <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
+
+                <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
+
+                <Text style={{
+                    fontFamily: 'BR Sonoma',
+                    fontWeight: '600',
+                    fontSize: 12,
+                    lineHeight: 20,
+                    letterSpacing: 0.1,
+                    color: '#03050F',
+                    marginVertical: 20,
+                }}>
+                    Aplican Términos y Condiciones.
+                </Text>
+
 
                 <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
@@ -160,9 +143,6 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    containerDropdown: {
-        // padding: 16,
-    },
     dropdown: {
         height: 56,
         borderColor: 'gray',
@@ -211,8 +191,6 @@ const styles = StyleSheet.create({
     },
     containerIdentification: {
         width: '50%',
-        // flexDirection: 'row',
-        // display: 'flex',
     },
     container: {
         flexDirection: 'row',
