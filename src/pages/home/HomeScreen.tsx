@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Image, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,6 +7,7 @@ import Header from '../../components/ui/Header';
 import image from '../../assets/images/family.png';
 import Divider from '../../components/ui/Divider';
 import MyButton from '../../components/ui/MyButton';
+import CustomTextInput from '../../components/ui/InputText';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -16,6 +17,12 @@ const HomeScreen = () => {
     const handleNavigate = () => {
         console.log('Button pressed');
         navigation.navigate('PlansScreen' as never);
+    };
+
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const handlePhoneNumberChange = (text: string) => {
+        setPhoneNumber(text);
     };
 
     return (
@@ -44,11 +51,16 @@ const HomeScreen = () => {
 
             <Divider />
 
-            <View style={{ marginHorizontal: 20 }}>
+            <View style={{ marginHorizontal: 20, paddingVertical: 30 }}>
                 <Text style={styles.subtitle}>
                     Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
                 </Text>
 
+                <CustomTextInput
+                    placeholder="Celular"
+                    value={phoneNumber}
+                    onChangeText={handlePhoneNumberChange}
+                />
 
                 <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
