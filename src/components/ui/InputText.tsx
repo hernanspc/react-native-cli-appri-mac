@@ -1,22 +1,21 @@
 import React from 'react';
-import { TextInput, StyleSheet, View, TextInputProps } from 'react-native';
+import { TextInput, StyleSheet, View, ViewProps } from 'react-native';
 
-interface CustomTextInputProps extends TextInputProps {
-    placeholder: string;
+interface CustomTextInputProps {
+    hintText: string;
     value?: string;
     onChangeText?: (text: string) => void;
 }
 
-const CustomTextInput: React.FC<CustomTextInputProps> = ({ placeholder, value, onChangeText, ...props }) => {
+const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onChangeText, ...props }) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
             <TextInput
-                placeholder={placeholder}
+                placeholder={hintText}
                 value={value}
                 onChangeText={onChangeText}
                 style={styles.input}
                 placeholderTextColor="#5E6488"
-                {...props}
             />
         </View>
     );
@@ -24,7 +23,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({ placeholder, value, o
 
 const styles = StyleSheet.create({
     container: {
-        width: 336,
+        width: '100%',
         height: 56,
         borderRadius: 8,
         borderWidth: 1,
