@@ -15,7 +15,7 @@ const HomeScreen = () => {
 
     const handleNavigate = () => {
         console.log('Button pressed');
-        // navigation.navigate('PlansScreen' as never);
+        navigation.navigate('PlansScreen' as never);
     };
 
     return (
@@ -50,7 +50,7 @@ const HomeScreen = () => {
                 </Text>
 
 
-                <MyButton title="Cotiza aquí" onPress={handleNavigate} />
+                <MyButton title="Cotiza aquí." onPress={handleNavigate} />
 
             </View>
 

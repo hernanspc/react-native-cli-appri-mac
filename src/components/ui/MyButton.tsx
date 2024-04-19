@@ -7,7 +7,7 @@ interface MyButtonProps extends TouchableOpacityProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export default function MyButton({ title, onPress, style, ...props }: MyButtonProps) {
+const MyButton: React.FC<MyButtonProps> = ({ title, onPress, style, ...props }) => {
     return (
         <TouchableOpacity style={[styles.button, style]} onPress={onPress} {...props}>
             <Text style={styles.buttonText}>{title}</Text>
@@ -36,3 +36,5 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
+export default MyButton;

@@ -8,23 +8,24 @@ interface BackgroundViewProps {
 const BackgroundView: React.FC<BackgroundViewProps> = ({ children }) => {
     return (
         <View style={[styles.container, Platform.OS == 'android' ? { paddingTop: 20 } : null]}>
-            <ImageBackground
-                source={require('../../assets/background/blur-asset1.png')}
-                style={styles.topBackground}
-            />
             <StatusBar
                 translucent
                 backgroundColor="transparent"
                 barStyle="dark-content"
             />
+            <SafeAreaView />
 
-            <SafeAreaView  >
-                {children}
-            </SafeAreaView>
+
+            <ImageBackground
+                source={require('../../assets/background/blur-asset1.png')}
+                style={styles.topBackground}
+            />
+
             <ImageBackground
                 source={require('../../assets/background/blur-asset-left.png')}
                 style={styles.bottomBackground}
             />
+            {children}
         </View>
     );
 };
@@ -36,9 +37,6 @@ const styles = StyleSheet.create({
     },
     topBackground: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        resizeMode: 'cover',
         position: 'absolute',
         top: 0,
         right: 0,
@@ -47,9 +45,6 @@ const styles = StyleSheet.create({
     },
     bottomBackground: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        resizeMode: 'cover',
         position: 'absolute',
         top: 0,
         right: 0,
