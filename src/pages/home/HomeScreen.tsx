@@ -14,7 +14,8 @@ const HomeScreen = () => {
     const navigation = useNavigation();
 
     const handleNavigate = () => {
-        navigation.navigate('PlansScreen' as never);
+        console.log('Button pressed');
+        // navigation.navigate('PlansScreen' as never);
     };
 
     return (
@@ -48,7 +49,8 @@ const HomeScreen = () => {
                     Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
                 </Text>
 
-                <MyButton text="Cotiza aquí" onPress={handleNavigate} />
+
+                <MyButton title="Cotiza aquí" onPress={handleNavigate} />
 
             </View>
 
