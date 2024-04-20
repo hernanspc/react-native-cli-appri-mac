@@ -38,7 +38,6 @@ const HomeScreen = () => {
         console.log('privacyPolicy ', privacyPolicy);
         console.log('politicalCommunications ', politicalCommunications);
 
-        // Validar campos de entrada y checkboxes
         if (!privacyPolicy || !politicalCommunications || numberDocument.length === 0 || phoneNumber.length === 0) {
             if (!privacyPolicy || !politicalCommunications) {
                 setPrivacyPolicyError(true);
@@ -54,7 +53,6 @@ const HomeScreen = () => {
             return;
         }
 
-        // Resetear errores si todo está bien
         setPrivacyPolicyError(false);
         setPoliticalCommunicationsError(false);
         setNumberDocumentError(false);
@@ -67,12 +65,12 @@ const HomeScreen = () => {
 
     const handleNroDocumentChange = (text: string) => {
         setNumberDocument(text);
-        setNumberDocumentError(false);  // Restablece el estado de error a false
+        setNumberDocumentError(false);
     };
 
     const handlePhoneNumberChange = (text: string) => {
         setPhoneNumber(text);
-        setPhoneNumberError(false);  // Restablece el estado de error a false
+        setPhoneNumberError(false);
     };
 
     return (
