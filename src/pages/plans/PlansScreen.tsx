@@ -23,41 +23,34 @@ const PlansScreen = () => {
         setProgress(0.5);
     };
 
+    const HeaderSection = () => (
+        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 20 }}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Entypo name="chevron-with-circle-left" size={24} color="#A9AFD9" />
+            </TouchableOpacity>
+            <Text style={styles.headerText}>Paso 1 de 2</Text>
+            <ProgressBar progress={progress} />
+        </View>
+    );
+
+    const OptionsSection = () => (
+        <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
+            <Text style={styles.headerText}>Rocío ¿Para quién deseas cotizar?</Text>
+            <Text style={styles.descriptionText}>
+                Selecciona la opción que se ajuste más a tus necesidades.
+            </Text>
+        </View>
+    );
+
+
     return (
         <>
             <ScrollView style={{ backgroundColor: '#FAFBFF' }}>
                 <SafeAreaView />
                 <Header />
-
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 20 }}>
-                    <TouchableOpacity onPress={() => {
-                        navigation.goBack();
-                    }}>
-                        <Entypo name="chevron-with-circle-left" size={24} color="#A9AFD9" />
-                    </TouchableOpacity>
-                    <Text style={styles.headerText}>
-                        Paso 1 de 2
-                    </Text>
-                    <ProgressBar progress={progress} />
-                </View>
+                <HeaderSection />
                 <Divider stylesProp={{ marginHorizontal: 0 }} />
-
-                <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
-                    <Text style={styles.headerText}>
-                        Rocío ¿Para quién deseas cotizar?
-                    </Text>
-
-                    <Text style={{
-                        fontFamily: 'Lato',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        lineHeight: 28,
-                        letterSpacing: 0.1,
-                        color: '#000000',
-                    }}>
-                        Selecciona la opción que se ajuste más a tus necesidades.
-                    </Text>
-                </View>
+                <OptionsSection />
 
                 <View style={{ marginHorizontal: 20 }}>
                     {options.map((option) => (
@@ -172,6 +165,14 @@ const styles = StyleSheet.create({
         letterSpacing: 0.8,
         color: '#141938',
     },
+    descriptionText: {
+        fontFamily: 'Lato',
+        fontWeight: '400',
+        fontSize: 16,
+        lineHeight: 28,
+        letterSpacing: 0.1,
+        color: '#000000',
+    }
 });
 
 export default PlansScreen;
