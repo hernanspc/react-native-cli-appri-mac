@@ -25,27 +25,10 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                 {item.isRecomended && <BorderedText text="Plan recomendado" />}
                 <View style={[{ display: 'flex', flexDirection: 'row', }, !item.isRecomended ? { marginTop: 40 } : null]}>
                     <View>
-                        <Text style={{
-                            fontFamily: 'Lato',
-                            fontWeight: '900',
-                            fontSize: 24,
-                            lineHeight: 32,
-                            letterSpacing: -0.2,
-                            color: '#141938',
-                            marginRight: 20
-                        }}>
+                        <Text style={styles.title}>
                             {item.title}
                         </Text>
-                        <Text style={{
-                            paddingTop: 15,
-                            fontFamily: 'Lato',
-                            fontWeight: '900',
-                            fontSize: 12,
-                            lineHeight: 16,
-                            letterSpacing: 0.6,
-                            color: '#7981B2',
-                            textTransform: 'uppercase',
-                        }}>
+                        <Text style={styles.subTitle}>
                             {item.subTitle}
                         </Text>
                         <TitleText title={item.price} />
@@ -53,7 +36,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                     <Image source={item.image} style={{ width: 56, height: 56, resizeMode: 'contain' }} />
                 </View>
             </View>
-            <Divider stylesProp={{ width: '90%' }} />
+            <Divider stylesProp={{ width: '90%', marginTop: 25 }} />
             <View style={{ display: 'flex', flexDirection: 'column' }}>
                 <DescriptionText
                     stylesProp={{ marginVertical: 20 }} boldWords={['Médico', 'general', 'a', 'domicilio', 'Consultas', 'en', 'clínica', 'Un', 'Chequeo', 'preventivo']}
@@ -81,7 +64,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
 
 const styles = StyleSheet.create({
     planCard: {
-        height: 607,
+        height: 667,
         marginTop: 20,
         marginRight: 20,
         paddingVertical: 30,

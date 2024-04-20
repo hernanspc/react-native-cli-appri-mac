@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import Header from '../../components/ui/Header';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -43,6 +43,16 @@ const PlansScreen = () => {
         </View>
     );
 
+    const filteredPlans = useMemo(() => {
+        if (selectedOption === '1') {
+            return dataPlansOptions.slice(0, 2);
+        }
+        if (selectedOption === '2') {
+            return dataPlansOptions.slice(3, 6);
+        }
+        return [];
+    }, [selectedOption]);
+
 
     return (
         <>
@@ -67,7 +77,7 @@ const PlansScreen = () => {
 
                     {selectedOption != null ? <FlatList
                         style={{ flexGrow: 0 }}
-                        data={dataPlansOptions}
+                        data={filteredPlans}
                         keyExtractor={(item) => item.id}
                         contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
                         showsHorizontalScrollIndicator={false}
