@@ -35,20 +35,22 @@ const HomeScreen = () => {
     const [politicalCommunicationsError, setPoliticalCommunicationsError] = React.useState<boolean>(false);
 
     const handleNavigate = () => {
-        console.log('privacyPolicy ', privacyPolicy);
-        console.log('politicalCommunications ', politicalCommunications);
+        console.log('documentType ', documentType);
 
-        if (!privacyPolicy || !politicalCommunications || numberDocument.length === 0 || phoneNumber.length === 0) {
+
+        if (!privacyPolicy || !politicalCommunications || numberDocument.length === 0 || phoneNumber.length === 0 || documentType == null) {
             if (!privacyPolicy || !politicalCommunications) {
                 setPrivacyPolicyError(true);
                 setPoliticalCommunicationsError(true);
-                Alert.alert('Debes aceptar todos los términos para continuar.');
             }
             if (numberDocument.length === 0) {
                 setNumberDocumentError(true);
             }
             if (phoneNumber.length === 0) {
                 setPhoneNumberError(true);
+            }
+            if (documentType == null) {
+                Alert.alert('Selecciona el tipo de documento');
             }
             return;
         }
