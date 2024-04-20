@@ -27,7 +27,6 @@ const HomeScreen = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneNumberError, setPhoneNumberError] = React.useState<boolean>(false);
 
-
     const [privacyPolicy, setPrivacyPolicy] = React.useState<boolean>(false);
     const [politicalCommunications, setPoliticalCommunications] = React.useState<boolean>(false);
 
@@ -35,8 +34,6 @@ const HomeScreen = () => {
     const [politicalCommunicationsError, setPoliticalCommunicationsError] = React.useState<boolean>(false);
 
     const handleNavigate = () => {
-        console.log('documentType ', documentType);
-
 
         if (!privacyPolicy || !politicalCommunications || numberDocument.length === 0 || phoneNumber.length === 0 || documentType == null) {
             if (!privacyPolicy || !politicalCommunications) {
