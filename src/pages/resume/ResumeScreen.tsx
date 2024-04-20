@@ -4,6 +4,8 @@ import Header from '../../components/ui/Header';
 import ResumeTitle from '../../components/ui/ResumeTitle';
 import ic_family from '../../assets/images/gl-family.png';
 import Divider from '../../components/ui/Divider';
+import SubTitleResume from '../../components/ui/SubTitleResume';
+import InformativeTextResume from '../../components/ui/InformativeTextResume';
 
 export default function ResumeScreen() {
     return (
@@ -25,6 +27,13 @@ export default function ResumeScreen() {
                             <Divider stylesProp={{ marginHorizontal: 0, marginVertical: 15 }} />
                         </View>
 
+                        <SubTitleResume title='Responsable de pago' />
+                        <InformativeTextResume title='DNI: 444888888' />
+                        <InformativeTextResume title='Celular: 5130216147' />
+
+                        <SubTitleResume title='Plan elegido' />
+                        <InformativeTextResume title='Plan en Casa y Clínica' />
+                        <InformativeTextResume title='Costo del Plan: $99 al mes' />
                     </View>
                 </View>
 
@@ -45,8 +54,9 @@ const styles = StyleSheet.create({
             width: 0,
             height: 1,
         },
+        shadowOpacity: 0.35,
         shadowRadius: 32,
-        elevation: 5,
+        elevation: 5, // Para Android
     },
     informative: {
         fontFamily: 'Lato',
