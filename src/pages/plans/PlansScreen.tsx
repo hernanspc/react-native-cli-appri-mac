@@ -9,6 +9,7 @@ import Card from '../../components/ui/Card';
 import { options } from '../../utils/optionsPlans';
 import { dataPlansOptions } from '../../utils/dataPlansOptions';
 import TitleText from '../../components/ui/TitleText';
+import DescriptionText from '../../components/ui/BoldText';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
@@ -68,7 +69,7 @@ const PlansScreen = () => {
                         />
                     ))}
 
-                    <FlatList
+                    {selectedOption != null ? <FlatList
                         style={{ flexGrow: 0 }}
                         data={dataPlansOptions}
                         keyExtractor={(item) => item.id}
@@ -127,7 +128,21 @@ const PlansScreen = () => {
                                         </View>
                                         <Divider stylesProp={{ width: '90%' }} />
                                         <View style={{ display: 'flex', flexDirection: 'column' }}>
-
+                                            <DescriptionText
+                                                stylesProp={{ marginVertical: 20 }} boldWords={['Médico', 'general', 'a', 'domicilio', 'Consultas', 'en', 'clínica', 'Un', 'Chequeo', 'preventivo']}
+                                                text={item.description1}
+                                            />
+                                            <DescriptionText
+                                                stylesProp={{ marginBottom: 20 }}
+                                                boldWords={['Videoconsulta', 'Medicinas', 'y', 'exámenes', 'Vacunas']}
+                                                text={item.description2}
+                                            />
+                                            <DescriptionText
+                                                stylesProp={{ marginBottom: 20 }}
+                                                stylesPropText={[fIndex == 2 ? { fontWeight: 'bold' } : null]}
+                                                boldWords={['Indemnización', 'más', 'de', '200', 'clínicas', 'del', 'país.']}
+                                                text={item.description3}
+                                            />
                                         </View>
 
                                     </TouchableOpacity>
@@ -135,7 +150,7 @@ const PlansScreen = () => {
 
                             );
                         }}
-                    />
+                    /> : null}
                 </View>
             </ScrollView>
         </>
