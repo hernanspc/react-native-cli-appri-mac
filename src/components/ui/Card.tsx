@@ -1,26 +1,35 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image, StyleProp, ViewStyle } from 'react-native';
 import radioUnselect from '../../assets/images/radio-unselect.png';
+import formMe from '../../assets/images/form-me.png';
 
 interface CardProps {
     onPress?: () => void;
+    title: string;
+    description: string;
+    stylesProp?: StyleProp<ViewStyle>;
 }
 
 const Card = (props: CardProps) => {
-    const { onPress } = props;
+    const { onPress, title, description, stylesProp } = props;
+
     return (
-        <TouchableOpacity onPress={onPress} style={styles.card}>
-            <View style={{ justifyContent: 'flex-end' }}>
+        <TouchableOpacity onPress={onPress} style={[styles.card, stylesProp]}>
+            <View style={{ alignItems: 'flex-end' }}>
                 <Image source={radioUnselect} style={{ width: 24, height: 24 }} />
             </View>
-            <Text style={{
-                fontFamily: 'Lato',
-                fontWeight: '900',
-                fontSize: 20,
-                lineHeight: 28,
-                letterSpacing: -0.2,
-                color: '#141938',
-            }}>Para mi</Text>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Image source={formMe} style={{ width: 32, height: 32, marginRight: 10 }} />
+                <Text style={{
+                    fontFamily: 'Lato',
+                    fontWeight: '900',
+                    fontSize: 20,
+                    lineHeight: 28,
+                    letterSpacing: -0.2,
+                    color: '#141938',
+                }}>{title}</Text>
+            </View>
+
             <Text style={{
                 fontFamily: 'Lato',
                 fontWeight: '400',
@@ -28,7 +37,8 @@ const Card = (props: CardProps) => {
                 lineHeight: 20,
                 letterSpacing: 0.2,
                 color: '#141938',
-            }}>Cotiza tu seguro de salud y agrega familiares si así lo deseas.</Text>
+                marginVertical: 10,
+            }}>{description}</Text>
         </TouchableOpacity>
     );
 };
@@ -36,7 +46,7 @@ const Card = (props: CardProps) => {
 const styles = StyleSheet.create({
     card: {
         display: 'flex',
-        paddingVertical: 20,
+        paddingVertical: 30,
         paddingHorizontal: 20,
         width: '100%',
         borderRadius: 24,
