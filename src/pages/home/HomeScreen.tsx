@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, Dimensions, TextInput, ScrollView } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, Dimensions, TextInput, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import BackgroundView from '../../components/ui/Background';
@@ -24,12 +24,15 @@ const HomeScreen = () => {
     const [numberDocument, setNumberDocument] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
-    const [privacyPolicy, setPrivacyPolicy] = React.useState(true);
-    const [politicalCommunications, setPoliticalCommunications] = React.useState(true);
+    const [privacyPolicy, setPrivacyPolicy] = React.useState(false);
+    const [politicalCommunications, setPoliticalCommunications] = React.useState(false);
 
 
     const handleNavigate = () => {
-        console.log('Button pressed');
+        if (!privacyPolicy && !politicalCommunications) {
+            Alert.alert('Debes aceptar al menos uno de los términos para continuar.');
+            return;
+        }
         navigation.navigate('PlansScreen' as never);
     };
 
@@ -39,88 +42,86 @@ const HomeScreen = () => {
     };
 
     return (
-        <>
-            <BackgroundView>
-                <ScrollView>
-                    <Header />
-                    <View style={styles.container}>
-                        <View style={[styles.section, { width: windowWidth / 2 }]}>
-                            <LinearGradient
-                                colors={['#00F4E2', '#00FF7F']}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                style={styles.linearGradient}
-                            >
-                                <Text style={styles.text}>Seguro Salud Flexible</Text>
-                            </LinearGradient>
-                            <Text style={styles.title}>Creado para ti y tu familia</Text>
 
-                        </View>
+        <BackgroundView>
+            <ScrollView>
+                <Header />
+                <View style={styles.container}>
+                    <View style={[styles.section, { width: windowWidth / 2 }]}>
+                        <LinearGradient
+                            colors={['#00F4E2', '#00FF7F']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                            style={styles.linearGradient}
+                        >
+                            <Text style={styles.text}>Seguro Salud Flexible</Text>
+                        </LinearGradient>
+                        <Text style={styles.title}>Creado para ti y tu familia</Text>
 
-                        <View style={[styles.section, styles.imageContainer]}>
-                            <Image source={image} style={styles.image} />
-                        </View>
                     </View>
 
-                    <Divider />
-
-                    <View style={{ marginHorizontal: 20, paddingVertical: 25 }}>
-                        <Text style={styles.subtitle}>
-                            Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
-                        </Text>
+                    <View style={[styles.section, styles.imageContainer]}>
+                        <Image source={image} style={styles.image} />
                     </View>
+                </View>
 
-                    <View style={{ marginHorizontal: 20 }}>
-                        <View style={{ display: 'flex', flexDirection: 'row' }}>
-                            <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
-                                <DropdownComponent
-                                    isFocus={isFocus}
-                                    setIsFocus={setIsFocus}
-                                    setDocumentType={setDocumentType}
-                                    setDocumentName={setDocumentName}
-                                    selectedValue={documentType} />
-                            </View>
-                            <CustomTextInput
-                                hintText="Nro documento"
-                                value={numberDocument}
-                                onChangeText={setNumberDocument}
-                                stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
-                            />
+                <Divider />
+
+                <View style={{ marginHorizontal: 20, paddingVertical: 25 }}>
+                    <Text style={styles.subtitle}>
+                        Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría, 100% online.
+                    </Text>
+                </View>
+
+                <View style={{ marginHorizontal: 20 }}>
+                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View style={[styles.containerIdentification, { marginVertical: 10 }]}>
+                            <DropdownComponent
+                                isFocus={isFocus}
+                                setIsFocus={setIsFocus}
+                                setDocumentType={setDocumentType}
+                                setDocumentName={setDocumentName}
+                                selectedValue={documentType} />
                         </View>
-
                         <CustomTextInput
-                            hintText="Celular"
-                            value={phoneNumber}
-                            onChangeText={handlePhoneNumberChange}
-                            stylesProp={{ marginBottom: 10 }}
+                            hintText="Nro documento"
+                            value={numberDocument}
+                            onChangeText={setNumberDocument}
+                            stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
                         />
-
-                        <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
-
-                        <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
-
-                        <Text style={{
-                            fontFamily: 'BR Sonoma',
-                            fontWeight: '600',
-                            fontSize: 12,
-                            lineHeight: 20,
-                            letterSpacing: 0.1,
-                            color: '#03050F',
-                            marginVertical: 20,
-                            textDecorationLine: 'underline',
-                        }}>
-                            Aplican Términos y Condiciones.
-                        </Text>
-
-
-                        <MyButton title="Cotiza aquí." onPress={handleNavigate} />
-
                     </View>
-                    <Footer />
-                </ScrollView>
-            </BackgroundView>
-        </>
 
+                    <CustomTextInput
+                        hintText="Celular"
+                        value={phoneNumber}
+                        onChangeText={handlePhoneNumberChange}
+                        stylesProp={{ marginBottom: 10 }}
+                    />
+
+                    <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
+
+                    <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
+
+                    <Text style={{
+                        fontFamily: 'BR Sonoma',
+                        fontWeight: '600',
+                        fontSize: 12,
+                        lineHeight: 20,
+                        letterSpacing: 0.1,
+                        color: '#03050F',
+                        marginVertical: 20,
+                        textDecorationLine: 'underline',
+                    }}>
+                        Aplican Términos y Condiciones.
+                    </Text>
+
+
+                    <MyButton title="Cotiza aquí." onPress={handleNavigate} />
+
+                </View>
+                <Footer />
+            </ScrollView>
+        </BackgroundView>
     );
 };
 
