@@ -1,17 +1,18 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Image, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image, StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 import radioUnselect from '../../assets/images/radio-unselect.png';
-import formMe from '../../assets/images/form-me.png';
 
 interface CardProps {
     onPress?: () => void;
     title: string;
     description: string;
     stylesProp?: StyleProp<ViewStyle>;
+    imageSourceTitle: ImageSourcePropType; // Definición del tipo de la imagen
+
 }
 
 const Card = (props: CardProps) => {
-    const { onPress, title, description, stylesProp } = props;
+    const { onPress, title, description, stylesProp, imageSourceTitle } = props;
 
     return (
         <TouchableOpacity onPress={onPress} style={[styles.card, stylesProp]}>
@@ -19,7 +20,7 @@ const Card = (props: CardProps) => {
                 <Image source={radioUnselect} style={{ width: 24, height: 24 }} />
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Image source={formMe} style={{ width: 32, height: 32, marginRight: 10 }} />
+                <Image source={imageSourceTitle} style={{ width: 32, height: 32, marginRight: 10 }} />
                 <Text style={{
                     fontFamily: 'Lato',
                     fontWeight: '900',

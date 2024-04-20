@@ -6,6 +6,8 @@ import ProgressBar from '../../components/ui/ProgressBar';
 import { useNavigation } from '@react-navigation/native';
 import Divider from '../../components/ui/Divider';
 import Card from '../../components/ui/Card';
+import formMe from '../../assets/images/form-me.png';
+import others from '../../assets/images/others.png';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3); // Un valor de ejemplo, puedes cambiarlo según lo necesites
@@ -57,7 +59,8 @@ const PlansScreen = () => {
                 </View>
 
                 <View style={{ marginHorizontal: 20 }}>
-                    <Card />
+                    <Card imageSourceTitle={formMe} title='Para mi' description='Cotiza tu seguro de salud y agrega familiares si así lo deseas.' />
+                    <Card imageSourceTitle={others} title='Para alguien más' description='Realiza una cotización para uno de tus familiares o cualquier persona.' stylesProp={{ marginTop: 20 }} />
                 </View>
 
 
