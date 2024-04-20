@@ -6,17 +6,20 @@ interface CustomTextInputProps {
     value?: string;
     onChangeText?: (text: string) => void;
     stylesProp?: StyleProp<ViewStyle>;
+    errorInput?: boolean;
 }
 
-const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onChangeText, stylesProp, ...props }) => {
+const CustomTextInput = (props: CustomTextInputProps) => {
+    const { hintText, value, onChangeText, stylesProp, errorInput } = props;
+
     return (
-        <View style={[styles.container, stylesProp]} {...props}>
+        <View style={[styles.container, stylesProp, errorInput ? { borderColor: '#FF667A' } : null]} {...props}>
             <TextInput
                 placeholder={hintText}
                 value={value}
                 onChangeText={onChangeText}
-                style={styles.input}
-                placeholderTextColor="#5E6488"
+                style={[styles.input]}
+                placeholderTextColor={errorInput ? '#FF667A' : '#5E6488'}
             />
         </View>
     );
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         fontSize: 16,
-        color: 'black',
+        // color: '#5E6488',
         paddingHorizontal: 16, // Añadido un padding para el texto
     },
 });

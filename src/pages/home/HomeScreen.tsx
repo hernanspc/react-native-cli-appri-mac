@@ -91,6 +91,7 @@ const HomeScreen = () => {
                                 selectedValue={documentType} />
                         </View>
                         <CustomTextInput
+                            // errorInput={true}
                             hintText="Nro documento"
                             value={numberDocument}
                             onChangeText={setNumberDocument}
@@ -99,6 +100,7 @@ const HomeScreen = () => {
                     </View>
 
                     <CustomTextInput
+                        // errorInput={true}
                         hintText="Celular"
                         value={phoneNumber}
                         onChangeText={handlePhoneNumberChange}
