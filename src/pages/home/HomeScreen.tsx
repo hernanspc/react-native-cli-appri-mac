@@ -28,9 +28,11 @@ const HomeScreen = () => {
     const [politicalCommunications, setPoliticalCommunications] = React.useState(false);
 
 
+
     const handleNavigate = () => {
         if (!privacyPolicy && !politicalCommunications) {
             Alert.alert('Debes aceptar al menos uno de los términos para continuar.');
+
             return;
         }
         navigation.navigate('PlansScreen' as never);
@@ -98,9 +100,17 @@ const HomeScreen = () => {
                         stylesProp={{ marginBottom: 10 }}
                     />
 
-                    <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política de Privacidad" onChange={setPrivacyPolicy} />
+                    <Checkbox
+                        stylesProp={{ marginVertical: 10 }}
+                        label="Acepto la Política de Privacidad"
+                        onChange={setPrivacyPolicy}
+                    />
 
-                    <Checkbox stylesProp={{ marginVertical: 10 }} label="Acepto la Política Comunicaciones Comerciales" onChange={setPoliticalCommunications} />
+                    <Checkbox
+                        stylesProp={{ marginVertical: 10 }}
+                        label="Acepto la Política Comunicaciones Comerciales"
+                        onChange={setPoliticalCommunications}
+                    />
 
                     <Text style={{
                         fontFamily: 'BR Sonoma',

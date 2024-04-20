@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet, Text, StyleProp, ViewStyle } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 interface CheckboxProps {
     label: string;
     onChange?: (isChecked: boolean) => void;
-    stylesProp?: StyleProp<ViewStyle>; //
+    stylesProp?: StyleProp<ViewStyle>;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ label, onChange, stylesProp }) => {
     const [isChecked, setIsChecked] = useState(false);
+    const [isErrorActive, setIsErrorActive] = useState(false);
 
     const toggleCheckbox = () => {
         const newCheckedState = !isChecked;
@@ -19,8 +20,17 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, onChange, stylesProp }) => {
         }
     };
 
+    console.log('errorActive s', isErrorActive);
+
     return (
-        <TouchableOpacity style={[styles.checkboxContainer, stylesProp]} onPress={toggleCheckbox}>
+        <TouchableOpacity
+            style={[
+                styles.checkboxContainer,
+                stylesProp,
+                isErrorActive && styles.error
+            ]}
+            onPress={toggleCheckbox}
+        >
             <View style={styles.checkbox}>
                 {isChecked &&
                     <View style={styles.checkboxInner}>
@@ -54,6 +64,9 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    error: {
+        borderColor: 'red', // Cambia el borde a rojo para indicar error
     },
 });
 
