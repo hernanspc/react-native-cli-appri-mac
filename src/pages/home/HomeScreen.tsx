@@ -22,7 +22,11 @@ const HomeScreen = () => {
     const [documentType, setDocumentType] = useState<string | null>(null);
 
     const [numberDocument, setNumberDocument] = useState('');
+    const [numberDocumentError, setNumberDocumentError] = React.useState<boolean>(false);
+
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [phoneNumberError, setPhoneNumberError] = React.useState<boolean>(false);
+
 
     const [privacyPolicy, setPrivacyPolicy] = React.useState<boolean>(false);
     const [politicalCommunications, setPoliticalCommunications] = React.useState<boolean>(false);
@@ -34,18 +38,36 @@ const HomeScreen = () => {
         console.log('privacyPolicy ', privacyPolicy);
         console.log('politicalCommunications ', politicalCommunications);
 
-        if (!privacyPolicy || !politicalCommunications) {
+        if (
+            !privacyPolicy ||
+            !politicalCommunications ||
+            numberDocument.length === 0 ||
+            phoneNumber.length === 0
+        ) {
             setPrivacyPolicyError(true);
             setPoliticalCommunicationsError(true);
+
+            setNumberDocumentError(true);
+            setPhoneNumberError(true);
+
             Alert.alert('Debes aceptar todos los términos para continuar.');
             return;
         }
+
+        setNumberDocumentError(false);
+        setPhoneNumberError(false);
         navigation.navigate('PlansScreen' as never);
     };
 
 
+    const handleNroDocumentChange = (text: string) => {
+        setNumberDocument(text);
+        setNumberDocumentError(false);  // Restablece el estado de error a false
+    };
+
     const handlePhoneNumberChange = (text: string) => {
         setPhoneNumber(text);
+        setPhoneNumberError(false);  // Restablece el estado de error a false
     };
 
     return (
@@ -91,16 +113,16 @@ const HomeScreen = () => {
                                 selectedValue={documentType} />
                         </View>
                         <CustomTextInput
-                            // errorInput={true}
+                            errorInput={numberDocumentError}
                             hintText="Nro documento"
                             value={numberDocument}
-                            onChangeText={setNumberDocument}
+                            onChangeText={handleNroDocumentChange}
                             stylesProp={{ width: '50%', marginVertical: 10 }} // Ancho personalizado como objeto de estilo
                         />
                     </View>
 
                     <CustomTextInput
-                        // errorInput={true}
+                        errorInput={phoneNumberError}
                         hintText="Celular"
                         value={phoneNumber}
                         onChangeText={handlePhoneNumberChange}
