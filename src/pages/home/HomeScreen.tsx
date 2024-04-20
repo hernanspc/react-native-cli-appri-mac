@@ -11,7 +11,6 @@ import CustomTextInput from '../../components/ui/InputText';
 import Checkbox from '../../components/ui/CheckItem';
 import DropdownComponent from '../../components/ui/DropDown';
 import Footer from '../../components/ui/Footer';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 
