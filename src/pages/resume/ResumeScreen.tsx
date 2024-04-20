@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         elevation: 5, // Para Android
     },
     informative: {
-        fontFamily: 'Lato',
+        fontFamily: 'Lato-Regular',
         fontWeight: '900',
         fontSize: 10,
         lineHeight: 16,

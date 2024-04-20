@@ -16,7 +16,7 @@ const InformativeTextResume = (props: Props) => {
 
 const styles = StyleSheet.create({
     text: {
-        fontFamily: 'Lato',
+        fontFamily: 'Lato-Regular',
         fontWeight: '400',
         fontSize: 14,
         lineHeight: 24,

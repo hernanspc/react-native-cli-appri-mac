@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         paddingTop: 15,
-        fontFamily: 'Lato',
+        fontFamily: 'Lato-Regular',
         fontWeight: '900',
         fontSize: 12,
         lineHeight: 16,

@@ -75,20 +75,21 @@ const PlansScreen = () => {
                         />
                     ))}
 
-                    {selectedOption != null ? <FlatList
-                        style={{ flexGrow: 0 }}
-                        data={filteredPlans}
-                        keyExtractor={(item) => item.id}
-                        contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                        renderItem={({ item, index: fIndex }) => {
-                            return (
-                                <PlanCard item={item} fIndex={fIndex} />
-                            );
-                        }}
-                    /> : null}
+
                 </View>
+                {selectedOption != null ? <FlatList
+                    style={{ flexGrow: 0, marginHorizontal: 10 }}
+                    data={filteredPlans}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    renderItem={({ item, index: fIndex }) => {
+                        return (
+                            <PlanCard item={item} fIndex={fIndex} />
+                        );
+                    }}
+                /> : null}
             </ScrollView>
         </>
     );

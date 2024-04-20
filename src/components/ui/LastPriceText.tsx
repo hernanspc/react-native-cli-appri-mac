@@ -9,7 +9,6 @@ const PriceText: React.FC<PriceTextProps> = ({ price }) => {
     return (
         <Text style={styles.priceText}>
             <Text>{price} </Text>
-            <Text style={styles.strikethrough}>antes</Text>
         </Text>
     );
 };
@@ -22,6 +21,7 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         letterSpacing: -0.2,
         color: '#7981B2',
+        textDecorationLine: 'line-through',
     },
     strikethrough: {
         textDecorationLine: 'line-through',
