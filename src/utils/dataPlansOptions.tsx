@@ -12,6 +12,8 @@ interface PlansOption {
     description3: string;
     image?: any;
     isRecomended?: boolean;
+    activeLastPrice?: boolean;
+    lastPrice?: string;
 }
 
 export const dataPlansOptions: PlansOption[] = [
@@ -58,6 +60,8 @@ export const dataPlansOptions: PlansOption[] = [
         description3: '● Indemnización de S/300 en caso de hospitalización por más de un día.',
         image: ic_home,
         isRecomended: false,
+        activeLastPrice: true,
+        lastPrice: '$39 antes',
     },
     {
         id: '5',
@@ -69,6 +73,8 @@ export const dataPlansOptions: PlansOption[] = [
         description3: '● Atención médica en más de 200 clínicas del país.',
         image: ic_clinica,
         isRecomended: true,
+        activeLastPrice: true,
+        lastPrice: '$99 antes',
     },
     {
         id: '6',
@@ -80,5 +86,7 @@ export const dataPlansOptions: PlansOption[] = [
         description3: '● Incluye todos los beneficios del plan en casa.',
         image: ic_home,
         isRecomended: false,
+        activeLastPrice: true,
+        lastPrice: '$49 antes',
     },
 ];

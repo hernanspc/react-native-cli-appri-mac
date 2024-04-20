@@ -6,6 +6,7 @@ import CustomButton from './CustomButton';
 import BorderedText from './BorderedText';
 import { useNavigation } from '@react-navigation/native';
 import Divider from './Divider';
+import LastPriceText from './LastPriceText';
 
 interface PlanCardProps {
     item: any;
@@ -28,9 +29,11 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                         <Text style={styles.title}>
                             {item.title}
                         </Text>
+
                         <Text style={styles.subTitle}>
                             {item.subTitle}
                         </Text>
+                        {item.activeLastPrice && <LastPriceText price={item.lastPrice} />}
                         <TitleText title={item.price} />
                     </View>
                     <Image source={item.image} style={{ width: 56, height: 56, resizeMode: 'contain' }} />
