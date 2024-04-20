@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Image, StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 import radioUnselect from '../../assets/images/radio-unselect.png';
+import radioSelect from '../../assets/images/radio-select.png';
 
 interface CardProps {
     onPress?: () => void;
@@ -8,16 +9,16 @@ interface CardProps {
     description: string;
     stylesProp?: StyleProp<ViewStyle>;
     imageSourceTitle: ImageSourcePropType; // Definición del tipo de la imagen
-
+    active: boolean;
 }
 
 const Card = (props: CardProps) => {
-    const { onPress, title, description, stylesProp, imageSourceTitle } = props;
+    const { onPress, title, description, stylesProp, imageSourceTitle, active } = props;
 
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.card, stylesProp]}>
+        <TouchableOpacity onPress={onPress} style={[styles.card, stylesProp, active ? { borderWidth: 3 } : null]}>
             <View style={{ alignItems: 'flex-end' }}>
-                <Image source={radioUnselect} style={{ width: 24, height: 24 }} />
+                <Image source={active ? radioSelect : radioUnselect} style={{ width: 24, height: 24 }} />
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Image source={imageSourceTitle} style={{ width: 32, height: 32, marginRight: 10 }} />
@@ -46,6 +47,7 @@ const Card = (props: CardProps) => {
 
 const styles = StyleSheet.create({
     card: {
+        marginBottom: 20,
         display: 'flex',
         paddingVertical: 30,
         paddingHorizontal: 20,

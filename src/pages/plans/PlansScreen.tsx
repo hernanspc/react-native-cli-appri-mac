@@ -1,6 +1,6 @@
-import { View, ScrollView, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import Header from '../../components/ui/Header'
+import React, { useState } from 'react';
+import { View, ScrollView, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Header from '../../components/ui/Header';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ProgressBar from '../../components/ui/ProgressBar';
 import { useNavigation } from '@react-navigation/native';
@@ -9,10 +9,36 @@ import Card from '../../components/ui/Card';
 import formMe from '../../assets/images/form-me.png';
 import others from '../../assets/images/others.png';
 
+interface Option {
+    id: string;
+    title: string;
+    description: string;
+    imageSource: any;
+}
+
 const PlansScreen = () => {
-    const [progress, setProgress] = useState(0.3); // Un valor de ejemplo, puedes cambiarlo según lo necesites
+    const [progress, setProgress] = useState(0.3);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const navigation = useNavigation();
 
+    const options: Option[] = [
+        {
+            id: '1',
+            title: 'Para mi',
+            description: 'Cotiza tu seguro de salud y agrega familiares si así lo deseas.',
+            imageSource: formMe,
+        },
+        {
+            id: '2',
+            title: 'Para alguien más',
+            description: 'Realiza una cotización para uno de tus familiares o cualquier persona.',
+            imageSource: others,
+        },
+    ];
+
+    const handleSelect = (optionId: string) => {
+        setSelectedOption(optionId);
+    };
 
     return (
         <>
@@ -34,15 +60,7 @@ const PlansScreen = () => {
                 <Divider stylesProp={{ marginHorizontal: 0 }} />
 
                 <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
-                    <Text style={{
-                        fontFamily: 'Lato',
-                        fontWeight: '700',
-                        fontSize: 28,
-                        lineHeight: 36,
-                        letterSpacing: -0.2,
-                        color: '#141938',
-                        marginBottom: 10,
-                    }}>
+                    <Text style={styles.headerText}>
                         Rocío ¿Para quién deseas cotizar?
                     </Text>
 
@@ -52,24 +70,29 @@ const PlansScreen = () => {
                         fontSize: 16,
                         lineHeight: 28,
                         letterSpacing: 0.1,
-                        color: '#000000', // Puedes cambiar este color si es necesario
+                        color: '#000000',
                     }}>
                         Selecciona la opción que se ajuste más a tus necesidades.
                     </Text>
                 </View>
 
                 <View style={{ marginHorizontal: 20 }}>
-                    <Card imageSourceTitle={formMe} title='Para mi' description='Cotiza tu seguro de salud y agrega familiares si así lo deseas.' />
-                    <Card imageSourceTitle={others} title='Para alguien más' description='Realiza una cotización para uno de tus familiares o cualquier persona.' stylesProp={{ marginTop: 20 }} />
+                    {options.map((option) => (
+                        <Card
+                            key={option.id}
+                            imageSourceTitle={option.imageSource}
+                            title={option.title}
+                            description={option.description}
+                            onPress={() => handleSelect(option.id)}
+                            active={selectedOption === option.id}
+                        />
+                    ))}
                 </View>
-
-
-
             </ScrollView>
         </>
-    )
-}
-export default PlansScreen;
+    );
+};
+
 const styles = StyleSheet.create({
     headerText: {
         fontFamily: 'Lato',
@@ -80,3 +103,5 @@ const styles = StyleSheet.create({
         color: '#141938',
     },
 });
+
+export default PlansScreen;
