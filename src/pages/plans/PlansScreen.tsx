@@ -10,6 +10,7 @@ import { options } from '../../utils/optionsPlans';
 import { dataPlansOptions } from '../../utils/dataPlansOptions';
 import TitleText from '../../components/ui/TitleText';
 import DescriptionText from '../../components/ui/BoldText';
+import CustomButton from '../../components/ui/CustomButton';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
@@ -79,7 +80,8 @@ const PlansScreen = () => {
                         renderItem={({ item, index: fIndex }) => {
                             return (
                                 <>
-                                    <TouchableOpacity style={{
+                                    <View style={{
+                                        height: 647,
                                         marginTop: 20,
                                         marginRight: 20,
                                         paddingVertical: 30,
@@ -144,10 +146,12 @@ const PlansScreen = () => {
                                                 text={item.description3}
                                             />
                                         </View>
-
-                                    </TouchableOpacity>
+                                        <CustomButton
+                                            title='Seleccionar Plan'
+                                            onPress={() => { }}
+                                        />
+                                    </View>
                                 </>
-
                             );
                         }}
                     /> : null}
