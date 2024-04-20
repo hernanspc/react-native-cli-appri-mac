@@ -24,15 +24,20 @@ const HomeScreen = () => {
     const [numberDocument, setNumberDocument] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
-    const [privacyPolicy, setPrivacyPolicy] = React.useState(false);
-    const [politicalCommunications, setPoliticalCommunications] = React.useState(false);
+    const [privacyPolicy, setPrivacyPolicy] = React.useState<boolean>(false);
+    const [politicalCommunications, setPoliticalCommunications] = React.useState<boolean>(false);
 
-
+    const [privacyPolicyError, setPrivacyPolicyError] = React.useState<boolean>(false);
+    const [politicalCommunicationsError, setPoliticalCommunicationsError] = React.useState<boolean>(false);
 
     const handleNavigate = () => {
-        if (!privacyPolicy && !politicalCommunications) {
-            Alert.alert('Debes aceptar al menos uno de los términos para continuar.');
+        console.log('privacyPolicy ', privacyPolicy);
+        console.log('politicalCommunications ', politicalCommunications);
 
+        if (!privacyPolicy || !politicalCommunications) {
+            setPrivacyPolicyError(true);
+            setPoliticalCommunicationsError(true);
+            Alert.alert('Debes aceptar todos los términos para continuar.');
             return;
         }
         navigation.navigate('PlansScreen' as never);
@@ -104,12 +109,14 @@ const HomeScreen = () => {
                         stylesProp={{ marginVertical: 10 }}
                         label="Acepto la Política de Privacidad"
                         onChange={setPrivacyPolicy}
+                        isErrorActive={privacyPolicyError}
                     />
 
                     <Checkbox
                         stylesProp={{ marginVertical: 10 }}
                         label="Acepto la Política Comunicaciones Comerciales"
                         onChange={setPoliticalCommunications}
+                        isErrorActive={politicalCommunicationsError}
                     />
 
                     <Text style={{

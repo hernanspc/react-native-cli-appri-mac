@@ -6,13 +6,14 @@ interface CheckboxProps {
     label: string;
     onChange?: (isChecked: boolean) => void;
     stylesProp?: StyleProp<ViewStyle>;
+    isErrorActive?: boolean;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, onChange, stylesProp }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ label, onChange, stylesProp, isErrorActive }) => {
     const [isChecked, setIsChecked] = useState(false);
-    const [isErrorActive, setIsErrorActive] = useState(false);
 
     const toggleCheckbox = () => {
+
         const newCheckedState = !isChecked;
         setIsChecked(newCheckedState);
         if (onChange) {
@@ -20,24 +21,21 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, onChange, stylesProp }) => {
         }
     };
 
-    console.log('errorActive s', isErrorActive);
-
     return (
         <TouchableOpacity
             style={[
                 styles.checkboxContainer,
                 stylesProp,
-                isErrorActive && styles.error
             ]}
             onPress={toggleCheckbox}
         >
-            <View style={styles.checkbox}>
+            <View style={[styles.checkbox, isErrorActive ? styles.error : null]}>
                 {isChecked &&
                     <View style={styles.checkboxInner}>
                         <FontAwesome name="check" size={16} color="white" />
                     </View>}
             </View>
-            <Text>{label}</Text>
+            <Text style={[isErrorActive ? styles.errorCheckboxText : null, isChecked ? styles.checkboxText : null]}>{label}</Text>
         </TouchableOpacity>
     );
 };
@@ -66,8 +64,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     error: {
-        borderColor: 'red', // Cambia el borde a rojo para indicar error
+        borderColor: '#FF667A', // Cambia el borde a rojo para indicar error
     },
+    errorCheckboxText: {
+        color: '#FF667A',
+    },
+    checkboxText: {
+        color: '#000',
+    }
 });
 
 export default Checkbox;
