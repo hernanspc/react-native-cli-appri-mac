@@ -4,6 +4,8 @@ import Header from '../../components/ui/Header'
 import Entypo from 'react-native-vector-icons/Entypo';
 import ProgressBar from '../../components/ui/ProgressBar';
 import { useNavigation } from '@react-navigation/native';
+import Divider from '../../components/ui/Divider';
+import Card from '../../components/ui/Card';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3); // Un valor de ejemplo, puedes cambiarlo según lo necesites
@@ -16,7 +18,7 @@ const PlansScreen = () => {
                 <SafeAreaView />
                 <Header />
 
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 20 }}>
                     <TouchableOpacity onPress={() => {
                         navigation.goBack();
                     }}>
@@ -27,6 +29,38 @@ const PlansScreen = () => {
                     </Text>
                     <ProgressBar progress={progress} />
                 </View>
+                <Divider stylesProp={{ marginHorizontal: 0 }} />
+
+                <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
+                    <Text style={{
+                        fontFamily: 'Lato',
+                        fontWeight: '700',
+                        fontSize: 28,
+                        lineHeight: 36,
+                        letterSpacing: -0.2,
+                        color: '#141938',
+                        marginBottom: 10,
+                    }}>
+                        Rocío ¿Para quién deseas cotizar?
+                    </Text>
+
+                    <Text style={{
+                        fontFamily: 'Lato',
+                        fontWeight: '400',
+                        fontSize: 16,
+                        lineHeight: 28,
+                        letterSpacing: 0.1,
+                        color: '#000000', // Puedes cambiar este color si es necesario
+                    }}>
+                        Selecciona la opción que se ajuste más a tus necesidades.
+                    </Text>
+                </View>
+
+                <View style={{ marginHorizontal: 20 }}>
+                    <Card />
+                </View>
+
+
 
             </ScrollView>
         </>

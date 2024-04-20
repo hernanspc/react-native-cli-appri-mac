@@ -5,7 +5,7 @@ interface CustomTextInputProps {
     hintText: string;
     value?: string;
     onChangeText?: (text: string) => void;
-    stylesProp?: StyleProp<ViewStyle>; // Nueva prop para el ancho como objeto de estilo
+    stylesProp?: StyleProp<ViewStyle>;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({ hintText, value, onChangeText, stylesProp, ...props }) => {
