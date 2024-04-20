@@ -38,26 +38,31 @@ const HomeScreen = () => {
         console.log('privacyPolicy ', privacyPolicy);
         console.log('politicalCommunications ', politicalCommunications);
 
-        if (
-            !privacyPolicy ||
-            !politicalCommunications ||
-            numberDocument.length === 0 ||
-            phoneNumber.length === 0
-        ) {
-            setPrivacyPolicyError(true);
-            setPoliticalCommunicationsError(true);
-
-            setNumberDocumentError(true);
-            setPhoneNumberError(true);
-
-            Alert.alert('Debes aceptar todos los términos para continuar.');
+        // Validar campos de entrada y checkboxes
+        if (!privacyPolicy || !politicalCommunications || numberDocument.length === 0 || phoneNumber.length === 0) {
+            if (!privacyPolicy || !politicalCommunications) {
+                setPrivacyPolicyError(true);
+                setPoliticalCommunicationsError(true);
+                Alert.alert('Debes aceptar todos los términos para continuar.');
+            }
+            if (numberDocument.length === 0) {
+                setNumberDocumentError(true);
+            }
+            if (phoneNumber.length === 0) {
+                setPhoneNumberError(true);
+            }
             return;
         }
 
+        // Resetear errores si todo está bien
+        setPrivacyPolicyError(false);
+        setPoliticalCommunicationsError(false);
         setNumberDocumentError(false);
         setPhoneNumberError(false);
+
         navigation.navigate('PlansScreen' as never);
     };
+
 
 
     const handleNroDocumentChange = (text: string) => {
