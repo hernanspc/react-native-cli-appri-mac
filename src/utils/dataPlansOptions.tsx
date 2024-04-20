@@ -11,6 +11,7 @@ interface PlansOption {
     description2: string;
     description3: string;
     image?: any;
+    isRecomended?: boolean;
 }
 
 export const dataPlansOptions: PlansOption[] = [
@@ -23,6 +24,7 @@ export const dataPlansOptions: PlansOption[] = [
         description2: '● Videoconsulta y orientación telefónica  al 100% en medicina general + pediatría.',
         description3: '● Indemnización de S/300 en caso de hospitalización por más de un día.',
         image: ic_home,
+        isRecomended: false,
     },
     {
         id: '2',
@@ -33,6 +35,7 @@ export const dataPlansOptions: PlansOption[] = [
         description2: '● Medicinas y exámenes derivados cubiertos al 80%',
         description3: '● Atención médica en más de 200 clínicas del país.',
         image: ic_clinica,
+        isRecomended: true,
     },
     {
         id: '3',
@@ -43,5 +46,6 @@ export const dataPlansOptions: PlansOption[] = [
         description2: '● Acceso a Vacunas en el Programa del MINSA en centros privados. ',
         description3: '● Incluye todos los beneficios del Plan en Casa. ',
         image: ic_home,
+        isRecomended: false,
     },
 ];

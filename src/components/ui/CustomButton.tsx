@@ -12,7 +12,7 @@ const CustomButton = ({ onPress, title }: { onPress: () => void; title: string }
 const styles = StyleSheet.create({
     button: {
         position: 'absolute',
-        bottom: 10,
+        bottom: 40,
         width: 224,
         height: 52,
         borderRadius: 32,

@@ -11,6 +11,7 @@ import { dataPlansOptions } from '../../utils/dataPlansOptions';
 import TitleText from '../../components/ui/TitleText';
 import DescriptionText from '../../components/ui/BoldText';
 import CustomButton from '../../components/ui/CustomButton';
+import BorderedText from '../../components/ui/BorderedText';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
@@ -81,7 +82,7 @@ const PlansScreen = () => {
                             return (
                                 <>
                                     <View style={{
-                                        height: 647,
+                                        height: 607,
                                         marginTop: 20,
                                         marginRight: 20,
                                         paddingVertical: 30,
@@ -97,8 +98,9 @@ const PlansScreen = () => {
                                         shadowRadius: 32,
                                         elevation: 5,
                                     }}>
-                                        <View style={{ marginRight: 10, padding: 10 }} >
-                                            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <View style={{ marginRight: 10, padding: 0 }} >
+                                            {item.isRecomended && <BorderedText text="Plan recomendado" />}
+                                            <View style={[{ display: 'flex', flexDirection: 'row', }, !item.isRecomended ? { marginTop: 40 } : null]}>
                                                 <View>
                                                     <Text style={{
                                                         fontFamily: 'Lato',
