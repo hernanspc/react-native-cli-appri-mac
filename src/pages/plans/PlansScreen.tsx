@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, ScrollView, SafeAreaView, StyleSheet, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import Header from '../../components/ui/Header';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ProgressBar from '../../components/ui/ProgressBar';
@@ -7,51 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 import Divider from '../../components/ui/Divider';
 import Card from '../../components/ui/Card';
 import { options } from '../../utils/optionsPlans';
-
-interface PlansOption {
-    id: string;
-    title: string;
-    subTitle: string;
-    price: string;
-    description1: string;
-    description2: string;
-    description3: string;
-}
+import { dataPlansOptions } from '../../utils/dataPlansOptions';
+import TitleText from '../../components/ui/TitleText';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const navigation = useNavigation();
-
-    const plansOptions: PlansOption[] = [
-        {
-            id: '1',
-            title: 'Plan en Casa',
-            subTitle: 'Costo del plan',
-            price: '$39 al mes',
-            description1: 'Médico general a domicilio por S/20 y medicinas cubiertas al 100%.',
-            description2: 'Videoconsulta y orientación telefónica  al 100% en medicina general + pediatría.',
-            description3: 'Indemnización de S/300 en caso de hospitalización por más de un día.',
-        },
-        {
-            id: '2',
-            title: 'Plan en Casa y Clinica',
-            subTitle: 'Costo del plan',
-            price: '$99 al mes',
-            description1: 'Consultas en clínica para cualquier especialidad.',
-            description2: 'Medicinas y exámenes derivados cubiertos al 80%',
-            description3: 'Atención médica en más de 200 clínicas del país.',
-        },
-        {
-            id: '3',
-            title: 'Plan en Casa + Checkeo',
-            subTitle: 'Costo del plan',
-            price: '$49 al mes',
-            description1: 'Un Chequeo preventivo general de manera presencial o virtual.',
-            description2: 'Acceso a Vacunas en el Programa del MINSA en centros privados. ',
-            description3: 'Incluye todos los beneficios del Plan en Casa. ',
-        },
-    ];
 
     const handleSelect = (optionId: string) => {
         setSelectedOption(optionId);
@@ -108,22 +70,71 @@ const PlansScreen = () => {
 
                     <FlatList
                         style={{ flexGrow: 0 }}
-                        data={plansOptions}
+                        data={dataPlansOptions}
                         keyExtractor={(item) => item.id}
-                        contentContainerStyle={{ paddingLeft: 10 }}
+                        contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
                         showsHorizontalScrollIndicator={false}
                         horizontal
                         renderItem={({ item, index: fIndex }) => {
                             return (
-                                <TouchableOpacity>
-                                    <View style={{ marginRight: 10, padding: 10 }} >
-                                        <Text>{item.title}</Text>
+                                <>
+                                    <TouchableOpacity style={{
+                                        marginTop: 20,
+                                        marginRight: 20,
+                                        paddingVertical: 30,
+                                        paddingHorizontal: 20,
+                                        width: 288,
+                                        borderRadius: 24,
+                                        backgroundColor: '#FFFFFF',
+                                        shadowColor: '#AEACF3',
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 1,
+                                        },
+                                        shadowRadius: 32,
+                                        elevation: 5,
+                                    }}>
+                                        <View style={{ marginRight: 10, padding: 10 }} >
+                                            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                                <View>
+                                                    <Text style={{
+                                                        fontFamily: 'Lato',
+                                                        fontWeight: '900',
+                                                        fontSize: 24,
+                                                        lineHeight: 32,
+                                                        letterSpacing: -0.2,
+                                                        color: '#141938',
+                                                        marginRight: 20
+                                                    }}>
+                                                        {item.title}
+                                                    </Text>
+                                                    <Text style={{
+                                                        paddingTop: 15,
+                                                        fontFamily: 'Lato',
+                                                        fontWeight: '900',
+                                                        fontSize: 12,
+                                                        lineHeight: 16,
+                                                        letterSpacing: 0.6,
+                                                        color: '#7981B2',
+                                                        textTransform: 'uppercase',
+                                                    }}>
+                                                        {item.subTitle}
+                                                    </Text>
+                                                    <TitleText title={item.price} />
+                                                </View>
+                                                <Image source={item.image} style={{ width: 56, height: 56, resizeMode: 'contain' }} />
+                                            </View>
+                                        </View>
+                                        <Divider stylesProp={{ width: '90%' }} />
+                                        <View style={{ display: 'flex', flexDirection: 'column' }}>
 
-                                    </View>
-                                </TouchableOpacity>
-                            )
+                                        </View>
+
+                                    </TouchableOpacity>
+                                </>
+
+                            );
                         }}
-
                     />
                 </View>
             </ScrollView>

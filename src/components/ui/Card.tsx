@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Image, StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 import radioUnselect from '../../assets/images/radio-unselect.png';
 import radioSelect from '../../assets/images/radio-select.png';
+import TitleText from './TitleText';
 
 interface CardProps {
     onPress?: () => void;
@@ -22,14 +23,7 @@ const Card = (props: CardProps) => {
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Image source={imageSourceTitle} style={{ width: 32, height: 32, marginRight: 10 }} />
-                <Text style={{
-                    fontFamily: 'Lato',
-                    fontWeight: '900',
-                    fontSize: 20,
-                    lineHeight: 28,
-                    letterSpacing: -0.2,
-                    color: '#141938',
-                }}>{title}</Text>
+                <TitleText title={title} />
             </View>
 
             <Text style={{
