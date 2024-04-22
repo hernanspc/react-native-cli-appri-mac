@@ -27,9 +27,6 @@ const PlansScreen = () => {
     const error = useSelector((state: any) => state.user.error);
 
     const plansList = useSelector((state: any) => state.plans?.data?.list);
-    const loadingPlans = useSelector((state: any) => state.plans?.loading);
-    const errorPlans = useSelector((state: any) => state.plans?.error);
-
 
     React.useEffect(() => {
         dispatch(fetchUser());
@@ -124,19 +121,20 @@ const PlansScreen = () => {
                     ))}
                 </View>
 
-                {selectedOption != null ? <FlatList
-                    style={{ flexGrow: 0, marginHorizontal: 10 }}
-                    data={filteredPlans}
-                    keyExtractor={(item) => item.id}
-                    contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    renderItem={({ item, index: fIndex }) => {
-                        return (
-                            <PlanCard key={fIndex} item={item} fIndex={fIndex} />
-                        );
-                    }}
-                /> : null}
+                {selectedOption != null ?
+                    <FlatList
+                        style={{ flexGrow: 0, marginHorizontal: 10 }}
+                        data={filteredPlans}
+                        keyExtractor={(item) => item.id}
+                        contentContainerStyle={{ paddingLeft: 10, paddingBottom: 50 }}
+                        showsHorizontalScrollIndicator={false}
+                        horizontal
+                        renderItem={({ item, index: fIndex }) => {
+                            return (
+                                <PlanCard key={item.id?.toString()} item={item} fIndex={fIndex} />
+                            );
+                        }}
+                    /> : null}
             </ScrollView>
         </>
     );

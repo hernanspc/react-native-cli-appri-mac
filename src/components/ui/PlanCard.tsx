@@ -7,6 +7,8 @@ import BorderedText from './BorderedText';
 import { useNavigation } from '@react-navigation/native';
 import Divider from './Divider';
 import LastPriceText from './LastPriceText';
+import { setSelectedPlan } from '../../app/slice/planSelectSlice';
+import { useDispatch } from 'react-redux';
 
 interface PlanCardProps {
     item: any;
@@ -15,8 +17,10 @@ interface PlanCardProps {
 
 const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
     const navigation = useNavigation();
+    const dispatch: any = useDispatch();
 
     const handleSelectPlan = () => {
+        dispatch(setSelectedPlan({ name: item.name, price: item.price }));
         navigation.navigate('ResumeScreen' as never);
     };
 

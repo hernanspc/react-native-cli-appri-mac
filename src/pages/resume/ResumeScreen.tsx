@@ -10,10 +10,10 @@ import { useSelector } from 'react-redux';
 
 export default function ResumeScreen() {
 
-
+    const userData = useSelector((state: any) => state.user.data);
+    const { name, lastName } = userData;
     const { nrodoc, phone } = useSelector((state: any) => state?.userInfo?.data);
-
-
+    const { selectedPlan } = useSelector((state: any) => state?.selectedPlan);
 
     return (
         <>
@@ -29,7 +29,7 @@ export default function ResumeScreen() {
                             </Text>
                             <View style={{ display: 'flex', flexDirection: 'row' }}>
                                 <Image source={ic_family} style={{ height: 24, width: 24, marginRight: 15 }} />
-                                <Text style={styles.clientName}>Rocio Miranda</Text>
+                                <Text style={styles.clientName}>{name} {lastName}</Text>
                             </View>
                             <Divider stylesProp={{ marginHorizontal: 0, marginVertical: 15 }} />
                         </View>
@@ -39,8 +39,8 @@ export default function ResumeScreen() {
                         <InformativeTextResume title={'Celular: ' + phone} />
 
                         <SubTitleResume title='Plan elegido' />
-                        <InformativeTextResume title='Plan en Casa y Clínica' />
-                        <InformativeTextResume title='Costo del Plan: $99 al mes' />
+                        <InformativeTextResume title={selectedPlan?.name} />
+                        <InformativeTextResume title={'Costo del Plan: ' + selectedPlan?.price + ' al mes'} />
                     </View>
                 </View>
 

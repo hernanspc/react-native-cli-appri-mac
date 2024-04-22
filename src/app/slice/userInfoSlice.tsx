@@ -14,7 +14,7 @@ const initialState: UserState = {
     },
 };
 
-export const userSlice = createSlice({
+export const userInfoSlice = createSlice({
     name: 'userInfo',
     initialState,
     reducers: {
@@ -31,6 +31,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setNrodoc, setPhone } = userSlice.actions;
+export const { setNrodoc, setPhone } = userInfoSlice.actions;
 
-export default userSlice.reducer;
+export default userInfoSlice.reducer;
