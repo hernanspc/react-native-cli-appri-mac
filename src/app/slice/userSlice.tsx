@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { calculateAge, parseDate } from '../../utils/functions';
 
 interface UserState {
     data: any;
@@ -40,7 +41,10 @@ export const fetchUser = () => async (dispatch: any) => {
     dispatch(fetchUserStart());
     try {
         const response = await axios.get('https://rimac-front-end-challenge.netlify.app/api/user.json');
-        dispatch(fetchUserSuccess(response.data));
+        const birthYear = parseDate(response.data.birthDay);
+        const age = calculateAge(birthYear);
+
+        dispatch(fetchUserSuccess({ ...response.data, age }));
     } catch (error: any) { // Especificamos que error es de tipo any
         dispatch(fetchUserFailure(error.message));
     }

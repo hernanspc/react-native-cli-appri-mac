@@ -9,7 +9,6 @@ import Card from '../../components/ui/Card';
 import { options } from '../../utils/optionsPlans';
 import { dataPlansOptions } from '../../utils/dataPlansOptions';
 import PlanCard from '../../components/ui/PlanCard';
-// import { fetchUser } from '../../app/slice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../app/slice/userSlice';
 
@@ -44,8 +43,6 @@ const PlansScreen = () => {
     );
 
     const OptionsSection = () => {
-
-
         return (
             <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
                 {userData && (
@@ -68,6 +65,7 @@ const PlansScreen = () => {
         return [];
     }, [selectedOption]);
 
+    console.log('userData ', userData);
 
     return (
         <>
@@ -81,8 +79,6 @@ const PlansScreen = () => {
                 {loading && <Text>Loading...</Text>}
                 {error && <Text>Error: {error}</Text>}
 
-
-
                 <View style={{ marginHorizontal: 20 }}>
                     {options.map((option) => (
                         <Card
@@ -94,7 +90,6 @@ const PlansScreen = () => {
                             active={selectedOption === option.id}
                         />
                     ))}
-
 
                 </View>
                 {selectedOption != null ? <FlatList
