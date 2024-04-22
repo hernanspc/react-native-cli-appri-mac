@@ -133,7 +133,7 @@ const PlansScreen = () => {
                     horizontal
                     renderItem={({ item, index: fIndex }) => {
                         return (
-                            <PlanCard item={item} fIndex={fIndex} />
+                            <PlanCard key={fIndex} item={item} fIndex={fIndex} />
                         );
                     }}
                 /> : null}
