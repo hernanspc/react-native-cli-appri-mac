@@ -40,23 +40,23 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                 </View>
             </View>
             <Divider stylesProp={{ width: '90%', marginTop: 25 }} />
-            {/* <View style={{ display: 'flex', flexDirection: 'column' }}>
+            <View style={{ display: 'flex', flexDirection: 'column' }}>
                 <DescriptionText
                     stylesProp={{ marginVertical: 20 }} boldWords={['Médico', 'general', 'a', 'domicilio', 'Consultas', 'en', 'clínica', 'Un', 'Chequeo', 'preventivo']}
-                    text={item.description1}
+                    text={`● ${item.description[0]}`}
                 />
                 <DescriptionText
                     stylesProp={{ marginBottom: 20 }}
                     boldWords={['Videoconsulta', 'Medicinas', 'y', 'exámenes', 'Vacunas']}
-                    text={item.description2}
+                    text={`● ${item.description[1]}`}
                 />
                 <DescriptionText
                     stylesProp={{ marginBottom: 20 }}
                     stylesPropText={[fIndex == 2 ? { fontWeight: 'bold' } : null]}
                     boldWords={['Indemnización', 'más', 'de', '200', 'clínicas', 'del', 'país.']}
-                    text={item.description3}
+                    text={`● ${item.description[2]}`}
                 />
-            </View> */}
+            </View>
             <CustomButton
                 title='Seleccionar Plan'
                 onPress={handleSelectPlan}
