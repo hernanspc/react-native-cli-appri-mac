@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
+    "axios": "^1.6.8",
     "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "^0.73.6",

@@ -8,16 +8,25 @@ import Divider from '../../components/ui/Divider';
 import Card from '../../components/ui/Card';
 import { options } from '../../utils/optionsPlans';
 import { dataPlansOptions } from '../../utils/dataPlansOptions';
-import TitleText from '../../components/ui/TitleText';
-import DescriptionText from '../../components/ui/BoldText';
-import CustomButton from '../../components/ui/CustomButton';
-import BorderedText from '../../components/ui/BorderedText';
 import PlanCard from '../../components/ui/PlanCard';
+// import { fetchUser } from '../../app/slice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from '../../app/slice/userSlice';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const navigation = useNavigation();
+
+    const dispatch: any = useDispatch();
+
+    const userData = useSelector((state: any) => state.user.data);
+    const loading = useSelector((state: any) => state.user.loading);
+    const error = useSelector((state: any) => state.user.error);
+
+    React.useEffect(() => {
+        dispatch(fetchUser());
+    }, [dispatch]);
 
     const handleSelect = (optionId: string) => {
         setSelectedOption(optionId);
@@ -34,14 +43,20 @@ const PlansScreen = () => {
         </View>
     );
 
-    const OptionsSection = () => (
-        <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
-            <Text style={styles.headerText}>Rocío ¿Para quién deseas cotizar?</Text>
-            <Text style={styles.descriptionText}>
-                Selecciona la opción que se ajuste más a tus necesidades.
-            </Text>
-        </View>
-    );
+    const OptionsSection = () => {
+
+
+        return (
+            <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
+                {userData && (
+                    <Text style={styles.headerText}>{userData.name} ¿Para quién deseas cotizar?</Text>
+                )}
+                <Text style={styles.descriptionText}>
+                    Selecciona la opción que se ajuste más a tus necesidades.
+                </Text>
+            </View>
+        )
+    };
 
     const filteredPlans = useMemo(() => {
         if (selectedOption === '1') {
@@ -62,6 +77,11 @@ const PlansScreen = () => {
                 <HeaderSection />
                 <Divider stylesProp={{ marginHorizontal: 0 }} />
                 <OptionsSection />
+
+                {loading && <Text>Loading...</Text>}
+                {error && <Text>Error: {error}</Text>}
+
+
 
                 <View style={{ marginHorizontal: 20 }}>
                     {options.map((option) => (
