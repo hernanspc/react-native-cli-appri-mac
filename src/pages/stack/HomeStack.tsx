@@ -17,7 +17,10 @@ const HomeStack = () => {
                     headerShown: false,
                 }}
             >
-                <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                <Stack.Screen
+                    name="HomeScreen"
+                    component={HomeScreen}
+                />
                 <Stack.Screen name="PlansScreen" component={PlansScreen} />
                 <Stack.Screen name="ResumeScreen" component={ResumeScreen} />
             </Stack.Navigator>

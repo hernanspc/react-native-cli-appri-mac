@@ -26,15 +26,14 @@ const PlansScreen = () => {
     const loading = useSelector((state: any) => state.user.loading);
     const error = useSelector((state: any) => state.user.error);
 
-    // const plans = useSelector((state: any) => state.plans?.data); // Obtén los planes del estado
-    const plansList = useSelector((state: any) => state.plans?.data?.list); // Obtén la lista de planes del estado
+    const plansList = useSelector((state: any) => state.plans?.data?.list);
     const loadingPlans = useSelector((state: any) => state.plans?.loading);
     const errorPlans = useSelector((state: any) => state.plans?.error);
 
 
     React.useEffect(() => {
         dispatch(fetchUser());
-        dispatch(fetchPlans()); // Llama a la acción para obtener los planes
+        dispatch(fetchPlans());
     }, [dispatch]);
 
     const handleSelect = (optionId: string) => {
@@ -64,7 +63,6 @@ const PlansScreen = () => {
             </View>
         )
     };
-
 
     const filteredPlans = useMemo(() => {
         console.log('userData:', userData);
@@ -102,7 +100,6 @@ const PlansScreen = () => {
         console.log('Opción seleccionada no válida.');
         return [];
     }, [selectedOption, plansList, userData]);
-
 
     return (
         <>

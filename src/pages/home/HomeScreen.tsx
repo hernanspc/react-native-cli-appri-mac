@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, Image, Dimensions, TextInput, ScrollView, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
 import BackgroundView from '../../components/ui/Background';
 import Header from '../../components/ui/Header';
@@ -12,7 +12,7 @@ import Checkbox from '../../components/ui/CheckItem';
 import DropdownComponent from '../../components/ui/DropDown';
 import Footer from '../../components/ui/Footer';
 import { useDispatch } from 'react-redux';
-import { updateUserData } from '../../app/slice/userSlice';
+import { setNrodoc, setPhone } from '../../app/slice/userInfoSlice';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -58,8 +58,8 @@ const HomeScreen = () => {
             return;
         } else {
             if (numberDocument === '30216147' && phoneNumber === '5130216147') {
-                // Aquí actualizamos el dni y el celular
-                dispatch(updateUserData('30216147', '5130216147'));
+                dispatch(setPhone('5130216147'));
+                dispatch(setNrodoc('30216147'));
 
                 setPrivacyPolicyError(false);
                 setPoliticalCommunicationsError(false);

@@ -6,8 +6,15 @@ import ic_family from '../../assets/images/gl-family.png';
 import Divider from '../../components/ui/Divider';
 import SubTitleResume from '../../components/ui/SubTitleResume';
 import InformativeTextResume from '../../components/ui/InformativeTextResume';
+import { useSelector } from 'react-redux';
 
 export default function ResumeScreen() {
+
+
+    const { nrodoc, phone } = useSelector((state: any) => state?.userInfo?.data);
+
+
+
     return (
         <>
             <ScrollView style={{ backgroundColor: '#FAFBFF' }}>
@@ -28,8 +35,8 @@ export default function ResumeScreen() {
                         </View>
 
                         <SubTitleResume title='Responsable de pago' />
-                        <InformativeTextResume title='DNI: 444888888' />
-                        <InformativeTextResume title='Celular: 5130216147' />
+                        <InformativeTextResume title={'DNI: ' + nrodoc} />
+                        <InformativeTextResume title={'Celular: ' + phone} />
 
                         <SubTitleResume title='Plan elegido' />
                         <InformativeTextResume title='Plan en Casa y Clínica' />

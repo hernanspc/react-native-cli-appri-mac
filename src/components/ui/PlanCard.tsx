@@ -19,15 +19,6 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
     const handleSelectPlan = () => {
         navigation.navigate('ResumeScreen' as never);
     };
-    // const handleSelectPlan = () => {
-    //     navigation.navigate('ResumeScreen', {
-    //         dni: userData?.dni, // Asume que tienes userData con el DNI del usuario
-    //         celular: userData?.celular, // Asume que tienes userData con el celular del usuario
-    //         title: item.name,
-    //         cost: item.price
-    //     });
-    // };
-
 
     return (
         <View style={styles.planCard}>

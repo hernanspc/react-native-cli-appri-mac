@@ -7,8 +7,6 @@ interface UserState {
         name: string;
         lastName: string;
         birthDay: string;
-        dni?: string;
-        celular?: string;
     } | null;
     loading: boolean;
     error: string | null;
@@ -37,20 +35,10 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-        setDni: (state, action: PayloadAction<string>) => {
-            if (state.data) {
-                state.data.dni = action.payload;
-            }
-        },
-        setCelular: (state, action: PayloadAction<string>) => {
-            if (state.data) {
-                state.data.celular = action.payload;
-            }
-        },
     },
 });
 
-export const { fetchUserStart, fetchUserSuccess, fetchUserFailure, setDni, setCelular } = userSlice.actions;
+export const { fetchUserStart, fetchUserSuccess, fetchUserFailure } = userSlice.actions;
 
 export default userSlice.reducer;
 
@@ -67,8 +55,5 @@ export const fetchUser = () => async (dispatch: any) => {
     }
 };
 
-export const updateUserData = (dni: string, celular: string) => async (dispatch: any) => {
-    dispatch(setDni(dni));
-    dispatch(setCelular(celular));
-};
+
 
