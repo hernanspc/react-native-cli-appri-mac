@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../app/slice/userSlice';
 import { fetchPlans } from '../../app/slice/plansSlice';
 import { calculateAge } from '../../utils/functions';
+import ic_home from '../../assets/images/ic-home.png';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
@@ -71,7 +72,14 @@ const PlansScreen = () => {
         console.log('selectedOption:', selectedOption);
 
         if (selectedOption === '1') {
-            const filtered = plansList.filter((plan: any) => plan.age >= 34);
+            const filtered = plansList.filter((plan: any) => plan.age >= 34).map((plan: any) => {
+                return {
+                    ...plan,
+                    subTitle: 'Costo del plan',
+                    image: ic_home,
+                    isRecomended: false,
+                };
+            });
             console.log('Planes filtrados (mayores o iguales a 34):', filtered);
             return filtered;
         }
@@ -80,7 +88,11 @@ const PlansScreen = () => {
                 const discountedPrice = plan.price * 0.95; // 5% de descuento
                 return {
                     ...plan,
-                    price: discountedPrice
+                    lastPrice: plan.price,
+                    subTitle: 'Costo del plan',
+                    price: discountedPrice,
+                    image: ic_home,
+                    isRecomended: false,
                 };
             });
             console.log('Planes filtrados (menores a 34 con descuento):', filtered);
@@ -115,7 +127,7 @@ const PlansScreen = () => {
                     ))}
                 </View>
 
-                {/* {selectedOption != null ? <FlatList
+                {selectedOption != null ? <FlatList
                     style={{ flexGrow: 0, marginHorizontal: 10 }}
                     data={filteredPlans}
                     keyExtractor={(item) => item.id}
@@ -127,7 +139,7 @@ const PlansScreen = () => {
                             <PlanCard item={item} fIndex={fIndex} />
                         );
                     }}
-                /> : null} */}
+                /> : null}
             </ScrollView>
         </>
     );

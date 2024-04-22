@@ -27,20 +27,20 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                 <View style={[{ display: 'flex', flexDirection: 'row', }, !item.isRecomended ? { marginTop: 40 } : null]}>
                     <View>
                         <Text style={styles.title}>
-                            {item.title}
+                            {item.name}
                         </Text>
 
                         <Text style={styles.subTitle}>
                             {item.subTitle}
                         </Text>
-                        {item.activeLastPrice && <LastPriceText price={item.lastPrice} />}
-                        <TitleText title={item.price} />
+                        {item.lastPrice && <LastPriceText price={`$ ${item.lastPrice} antes`} />}
+                        <TitleText title={`$ ${item.price}`} />
                     </View>
                     <Image source={item.image} style={{ width: 56, height: 56, resizeMode: 'contain' }} />
                 </View>
             </View>
             <Divider stylesProp={{ width: '90%', marginTop: 25 }} />
-            <View style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* <View style={{ display: 'flex', flexDirection: 'column' }}>
                 <DescriptionText
                     stylesProp={{ marginVertical: 20 }} boldWords={['Médico', 'general', 'a', 'domicilio', 'Consultas', 'en', 'clínica', 'Un', 'Chequeo', 'preventivo']}
                     text={item.description1}
@@ -56,7 +56,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ item, fIndex }) => {
                     boldWords={['Indemnización', 'más', 'de', '200', 'clínicas', 'del', 'país.']}
                     text={item.description3}
                 />
-            </View>
+            </View> */}
             <CustomButton
                 title='Seleccionar Plan'
                 onPress={handleSelectPlan}
