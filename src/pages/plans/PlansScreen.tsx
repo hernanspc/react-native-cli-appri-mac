@@ -11,6 +11,8 @@ import { dataPlansOptions } from '../../utils/dataPlansOptions';
 import PlanCard from '../../components/ui/PlanCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../app/slice/userSlice';
+import { fetchPlans } from '../../app/slice/plansSlice';
+import { calculateAge } from '../../utils/functions';
 
 const PlansScreen = () => {
     const [progress, setProgress] = useState(0.3);
@@ -23,8 +25,15 @@ const PlansScreen = () => {
     const loading = useSelector((state: any) => state.user.loading);
     const error = useSelector((state: any) => state.user.error);
 
+    // const plans = useSelector((state: any) => state.plans?.data); // Obtén los planes del estado
+    const plansList = useSelector((state: any) => state.plans?.data?.list); // Obtén la lista de planes del estado
+    const loadingPlans = useSelector((state: any) => state.plans?.loading);
+    const errorPlans = useSelector((state: any) => state.plans?.error);
+
+
     React.useEffect(() => {
         dispatch(fetchUser());
+        dispatch(fetchPlans()); // Llama a la acción para obtener los planes
     }, [dispatch]);
 
     const handleSelect = (optionId: string) => {
@@ -55,17 +64,33 @@ const PlansScreen = () => {
         )
     };
 
+
     const filteredPlans = useMemo(() => {
+        console.log('userData:', userData);
+        console.log('plansList:', plansList);
+        console.log('selectedOption:', selectedOption);
+
         if (selectedOption === '1') {
-            return dataPlansOptions.slice(0, 2);
+            const filtered = plansList.filter((plan: any) => plan.age >= 34);
+            console.log('Planes filtrados (mayores o iguales a 34):', filtered);
+            return filtered;
         }
         if (selectedOption === '2') {
-            return dataPlansOptions.slice(3, 6);
+            const filtered = plansList.filter((plan: any) => plan.age >= 34).map((plan: any) => {
+                const discountedPrice = plan.price * 0.95; // 5% de descuento
+                return {
+                    ...plan,
+                    price: discountedPrice
+                };
+            });
+            console.log('Planes filtrados (menores a 34 con descuento):', filtered);
+            return filtered;
         }
-        return [];
-    }, [selectedOption]);
 
-    console.log('userData ', userData);
+        console.log('Opción seleccionada no válida.');
+        return [];
+    }, [selectedOption, plansList, userData]);
+
 
     return (
         <>
@@ -74,9 +99,7 @@ const PlansScreen = () => {
                 <Header />
                 <HeaderSection />
                 <Divider stylesProp={{ marginHorizontal: 0 }} />
-                <OptionsSection />
-
-                {loading && <Text>Loading...</Text>}
+                {loading ? <Text style={styles.headerText}>...</Text> : <OptionsSection />}
                 {error && <Text>Error: {error}</Text>}
 
                 <View style={{ marginHorizontal: 20 }}>
@@ -90,9 +113,9 @@ const PlansScreen = () => {
                             active={selectedOption === option.id}
                         />
                     ))}
-
                 </View>
-                {selectedOption != null ? <FlatList
+
+                {/* {selectedOption != null ? <FlatList
                     style={{ flexGrow: 0, marginHorizontal: 10 }}
                     data={filteredPlans}
                     keyExtractor={(item) => item.id}
@@ -104,7 +127,7 @@ const PlansScreen = () => {
                             <PlanCard item={item} fIndex={fIndex} />
                         );
                     }}
-                /> : null}
+                /> : null} */}
             </ScrollView>
         </>
     );
