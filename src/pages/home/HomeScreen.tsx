@@ -11,6 +11,8 @@ import CustomTextInput from '../../components/ui/InputText';
 import Checkbox from '../../components/ui/CheckItem';
 import DropdownComponent from '../../components/ui/DropDown';
 import Footer from '../../components/ui/Footer';
+import { useDispatch } from 'react-redux';
+import { updateUserData } from '../../app/slice/userSlice';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,12 +23,12 @@ const HomeScreen = () => {
     const [documentName, setDocumentName] = useState<string | null>(null);
     const [documentType, setDocumentType] = useState<string | null>(null);
 
-    // const [numberDocument, setNumberDocument] = useState('');
-    const [numberDocument, setNumberDocument] = useState('30216147');
+    const [numberDocument, setNumberDocument] = useState('');
+    // const [numberDocument, setNumberDocument] = useState('30216147');
     const [numberDocumentError, setNumberDocumentError] = React.useState<boolean>(false);
 
-    // const [phoneNumber, setPhoneNumber] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('5130216147');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    // const [phoneNumber, setPhoneNumber] = useState('5130216147');
     const [phoneNumberError, setPhoneNumberError] = React.useState<boolean>(false);
 
     const [privacyPolicy, setPrivacyPolicy] = React.useState<boolean>(false);
@@ -34,6 +36,8 @@ const HomeScreen = () => {
 
     const [privacyPolicyError, setPrivacyPolicyError] = React.useState<boolean>(false);
     const [politicalCommunicationsError, setPoliticalCommunicationsError] = React.useState<boolean>(false);
+
+    const dispatch: any = useDispatch();
 
     const handleNavigate = () => {
 
@@ -54,6 +58,9 @@ const HomeScreen = () => {
             return;
         } else {
             if (numberDocument === '30216147' && phoneNumber === '5130216147') {
+                // Aquí actualizamos el dni y el celular
+                dispatch(updateUserData('30216147', '5130216147'));
+
                 setPrivacyPolicyError(false);
                 setPoliticalCommunicationsError(false);
                 setNumberDocumentError(false);
